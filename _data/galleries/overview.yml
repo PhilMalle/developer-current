@@ -1,6 +1,24 @@
 -
-  title: Mountains
-  directory: mountains
+  title: Blue Team Labs
+  directory: blueteamlabs
+  preview:
+    filename: 1.jpg
+    original: 1-thumbnail.jpg
+    sizes:
+    - 1-thumbnail.jpg
+    thumbnail: 1-thumbnail.jpg
+-
+  title: Hack the Box
+  directory: hackthebox
+  preview:
+    filename: 1.jpg
+    original: 1-thumbnail.jpg
+    sizes:
+    - 1-thumbnail.jpg
+    thumbnail: 1-thumbnail.jpg
+-
+  title: Try Hack Me
+  directory: tryhackme
   preview:
     filename: 1.jpg
     original: 1-thumbnail.jpg
