@@ -1,12 +1,17 @@
 ---
 title: Writeup - THM - Attacktive Directory
-author: Fr3akazo1d!
-date: 2020-11-03 
-categories: [Hacking, Walkthrough]
-tags: [tryhackeme, Active Direcotry, hacking, pwned, enum4linux, kerbrute]
-image: /assets/img/thm-images/THM-AttactriveDirctory.png
-image: /assets/img/thm-images/THM-AttactriveDirctory-1.png
+layout: post
+summary: Walkthrough of Attacktive Directory from TryHackMe.
+author: fr3akazo1d
+date: '2020-09-24 23:14:00'
+keywords: tryhackeme, Active Direcotry, hacking, pwned, enum4linux, kerbrute
+category: walkthroughs
+thumbnail: "/assets/img/thm-images/THM-AttactriveDirctory.png"
+permalink: "/blog/attacktivedirectory/"
+usemathjax: true
+published: true
 ---
+
 # General Information
 
 | Room        | Date        | Difficulty | Tags                               | Time |
