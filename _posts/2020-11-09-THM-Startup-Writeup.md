@@ -7,7 +7,7 @@ date: '2020-11-09 23:14:00'
 keywords: tryhackeme, Startup, Wireshark, spicy, cron, enumeration, gobuster
 category: walkthroughs
 thumbnail: "/assets/img/thm-images/THM-Startup.png"
-permalink: "/blog/bountyhacker/"
+permalink: "/blog/startup/"
 usemathjax: true
 published: true
 ---
