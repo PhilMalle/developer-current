@@ -1,12 +1,17 @@
 ---
 title: Writeup - THM - Anonymous
-date: 2020-09-27 23:14:00 +0100
-description: "Walkthrough of Anonymous of TryHackme"
-categories: [Hacking, CTF]
-tags: [TryHackeMe, Anonymous, Hacking, pwned]
-author: Fr3akazo1d!
-image: /assets/img/thm-images/THM-Anonymous.png
+layout: post
+summary: Walkthrough of Anonymous of TryHackme.
+author: fr3akazo1d
+date: '2020-09-27 23:14:00'
+keywords: TryHackeMe, Anonymous, Hacking, pwned
+category: walkthroughs
+thumbnail: "/assets/img/thm-images/THM-BountyHacker.png"
+permalink: "/blog/anonymous/"
+usemathjax: true
+published: true
 ---
+
 
 # General Information
 
