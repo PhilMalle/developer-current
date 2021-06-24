@@ -6,7 +6,7 @@ author: fr3akazo1d
 keywords: Shell, netcat, socat, metasploit
 category: walkthroughs
 thumbnail: "/assets/img/thm-images/whatashell-thm.png"
-permalink: "/blog/bountyhacker/"
+permalink: "/blog/whatashell/"
 usemathjax: true
 published: true
 ---
