@@ -1,11 +1,17 @@
 ---
 title: Writeup - THM - Startup
-author: Fr3akazo1d!
-date: 2020-11-09 
-categories: [Hacking, CTF]
-tags: [tryhackeme, Startup, Wireshark, spicy, cron, enumeration, gobuster]
-image: /assets/img/thm-images/THM-Startup.png
+layout: post
+summary: Walkthrough of Startup of TryHackMe.
+author: fr3akazo1d
+date: '2020-11-09 23:14:00'
+keywords: tryhackeme, Startup, Wireshark, spicy, cron, enumeration, gobuster
+category: walkthroughs
+thumbnail: "/assets/img/thm-images/THM-Startup.png"
+permalink: "/blog/bountyhacker/"
+usemathjax: true
+published: true
 ---
+
 # General Information
 
 | Room        | Date        | Difficulty | Tags                                   | Time     |
