@@ -1,11 +1,15 @@
 ---
-title: "Writeup - THM - BountyHacker"
-description: "Walkthrough of Bounty Hacker of TryHackMe"
-ate: 2020-09-24 23:14:00 +0100 
-author: Fr3akazo1d!
-categories: [Hacking, CTF]
-tags: [Linux, tar, privesc, security]
-image: /assets/img/thm-images/THM-BountyHacker.png
+title: Writeup - THM - BountyHacker
+layout: post
+summary: Walkthrough of Bounty Hacker of TryHackMe.
+author: fr3akazo1d
+date: '2020-09-24 23:14:00'
+keywords: Linux, tar, privesc, security
+category: walkthroughs
+thumbnail: "/assets/img/thm-images/THM-BountyHacker.png"
+permalink: "/blog/bountyhacker/"
+usemathjax: true
+published: true
 ---
 
 # Global Information
