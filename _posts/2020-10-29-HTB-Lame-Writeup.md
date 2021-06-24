@@ -6,6 +6,22 @@ categories: [Hacking, CTF]
 tags: [Security, ctf, smbmap, msfconsole, CVE-2007-2447, Lame, HackTheBox, HTB]
 image: /assets/img/htb-images/lame-htb.png
 ---
+
+---
+title: Writeup - HTB - Lame
+layout: post
+summary: Walkthrough of Lame from HacktheBox.
+author: fr3akazo1d
+date: '2020-10-29 23:14:00'
+keywords: Security, ctf, smbmap, msfconsole, CVE-2007-2447, Lame, HackTheBox, HTB
+category: walkthroughs
+thumbnail: "/assets/img/htb-images/lame-htb.png"
+permalink: "/blog/lame/"
+usemathjax: true
+published: true
+---
+
+
 # General Information
 
 | Platform | Room        | Date        | Difficulty | Tags                               | Time |
