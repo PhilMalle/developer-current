@@ -1,14 +1,5 @@
 ---
 title: Writeup - HTB - Lame
-author: Fr3akazo1d!
-date: 2020-10-29 23:14:00 +0100
-categories: [Hacking, CTF]
-tags: [Security, ctf, smbmap, msfconsole, CVE-2007-2447, Lame, HackTheBox, HTB]
-image: /assets/img/htb-images/lame-htb.png
----
-
----
-title: Writeup - HTB - Lame
 layout: post
 summary: Walkthrough of Lame from HacktheBox.
 author: fr3akazo1d
