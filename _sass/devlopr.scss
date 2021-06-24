@@ -22,6 +22,7 @@ html[data-theme="dark"] {
     --card-background-color: rgb(59,66,82);
     --newsletter-background-color: #3b4252;
     --button-background-color: #3b4252;
+    --hover-home-articel-color: #d8dee9;
 }
 
 html,
@@ -42,6 +43,7 @@ html[data-theme="light"] {
     --card-background-color: rgb(229,233,240);
     --newsletter-background-color: #00000008;
     --button-background-color: #e5e9f0;
+    --hover-home-articel-color: #2e3440;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,6 +68,7 @@ html[data-theme="light"] {
         --card-background-color: rgb(59,66,82);
         --newsletter-background-color: #3b4252;
         --button-background-color: #3b4252;
+	--hover-home-articel-color: #d8dee9;
     }
 
     /* Light Mode */
@@ -88,6 +91,7 @@ html[data-theme="light"] {
         --social-link-color: #2e3440;
         --card-background-color: rgb(229,233,240);
         --button-background-color:#e5e9f0;
+	--hover-home-articel-color: #2e3440;
     }
 }
 
@@ -657,8 +661,8 @@ header {
 }
 .article-card a :hover{
     text-decoration: none;
-    background: #3b4252!important;
-    border-color: #3b4252;
+    background: var(--hover-home-articel-color)!important;
+    border-color: var(--hover-home-articel-color);
     background: transparent;
 }
 
