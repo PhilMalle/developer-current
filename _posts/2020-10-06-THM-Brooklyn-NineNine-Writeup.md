@@ -1,9 +1,13 @@
 ---
-layout: post
 title: Writeup - THM - Brooklyn-NineNine
-description: "Walkthrough of Brooklyn NineNine of TryHackme"
-tags: [TryHackeMe, Brooklyn-NineNine, Hacking, pwned]
-author: Fr3akazo1d!
+layout: post
+summary: Walkthrough of Brooklyn NineNine of TryHackme.
+author: fr3akazo1d
+keywords: TryHackeMe, Brooklyn-NineNine, Hacking, pwned
+category: walkthroughs
+permalink: "/blog/brooklynNineNine/"
+usemathjax: true
+published: true
 ---
 
 # General Information
