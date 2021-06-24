@@ -8,78 +8,96 @@ baseurl: "" # the subpath of your site, e.g. /blog
 
 # Navigation
 urls:
-    - text: Home
-      url: /
-    - text: About
+    - text: About Me
       url: /about
+    - text: Achievements
+      url: /gallery
     - text: Blog
       url: /blog
-    - text: Gallery
-      url: /gallery
-    - text: Shop
-      url : /shop
     - text: Contact
       url : /contact
+    - text: Links
+      url: /links
 
 
 # Edit Author details (For multi authors check _data/authors.yml)
 
 author_logo: profile.png
-author: John Doe
-author_bio: Hi, my name is John Doe. I built this site using devlopr-jekyll :D
-author_email: "mail@sujaykundu.com"
-author_location: India
-author_website_url: "https://sujaykundu.com"
-typewrite-text: devlopr is a jekyll framework built for developers. You can edit this in _config.yml file
+author: Phil Malle
+author_bio: Hi, my name is Phil Malle. This is my personal blog about technologies, Cyber-Security and other similar topics.
+author_email: "philipp.malle@pm.com"
+author_location: Austria
+author_website_url: "https://philmalle.github.io"
+typewrite-text: Cyber-Security || Technologies || Pen-Testing || Hacking
 
 # Experiences
 author_work_experiences:
-            - company_name: Google
-              company_logo: google.png
-              company_url: https://google.com
-              designation: Software Engineer
-              description: Worked on various Google Products
+            - company_name: Atos
+              company_logo: atos.png
+              company_url: https://atos.net
+              designation: Cyber Security Analyst
+              description: SOC Analyst
               visibility: true
-            - company_name: Microsoft
-              company_logo: microsoft.png
-              company_url: https://microsoft.com
-              designation: Azure Developer
-              description: Worked on various Azure Cloud Products
+            - company_name: Atos
+              company_logo: atos.png
+              company_url: https://atos.net
+              designation: Network Engineer
+              description: Configured and operate Campus-LAN based on Cisco Hardware
               visibility: true
 
 # Education
 author_education_details:
-              - college_logo: mit.png
-                college_name: MIT
-                college_url: https://mit.org
-                college_degree: CS Engineer
-                description: Bachelor of Technology
+              - college_logo: ccna-rs.png
+                college_name: CCNA
+                college_url: https://www.credly.com/badges/352a61de-48a9-4fe8-9c1e-82b52fd094a6/public_url
+                college_degree: Cisco Certified Network Associate Routing and Switching 
+                description: Expires on 30 April 2023
                 visibility: true
+              - college_logo: ccna-s.png
+                college_name: CCNA
+                college_url: https://www.credly.com/badges/3d4020c8-a8fe-415f-b811-cde350ffef7b/public_url
+                college_degree: Cisco Certified Network Associate Security 
+                description: Expires on 30 April 2023
+                visibility: true
+              - college_logo: specialist.png
+                college_name: CCNA
+                college_url: https://www.credly.com/badges/3d4020c8-a8fe-415f-b811-cde350ffef7b/public_url
+                college_degree: Cisco Certified Specialist - Data Center Design 
+                description: Expires on 9 February 2022
+                visibility: true
+
 
 # Projects
 author_project_details:
-              - project_thumbnail: gamershub.png
-                project_title: Gamers Hub
-                project_description: A Platform built for Gamers and Game Devs
-                project_url: https://gamershub.in
+              - project_thumbnail: BlueteamlabsOnline.png
+                project_title: BlueTeamLabs
+                project_description: A Platform for Cyber Defense
+                project_url: https://blueteamlabs.online
                 visibility: true
-              - project_thumbnail: hack4r.PNG
-                project_title: Hack4r
-                project_description: A Platform built for Hackers and Penetration Testers
-                project_url: https://hack4r.com
+              - project_thumbnail: HackTheBox.jpg
+                project_title: HackTheBox
+                project_description: A Platform for Hacking
+                project_url: https://hackthebox.eu
+                visibility: true
+              - project_thumbnail: THMlogo.jpg
+                project_title: TryHackMe
+                project_description: A Platform for Hacking
+                project_url: https://tryhackme.com
                 visibility: true
 
 # social links
-twitter_username: johndoe
-github_username:  sujaykundu777
-facebook_username: johndoe
-linkedin_username: johndoe
-behance_username: johndoe
-instagram_username: johndoe
-medium_username: johndoe
-telegram_username: johndoe
-dribbble_username: johndoe
-flickr_username: johndoe
+twitter_username: phil_malle
+github_username:  philmalle
+facebook_username: malle.philipp
+linkedin_username: phil-malle
+behance_username: 
+instagram_username: phil.malle
+medium_username: 
+telegram_username: PMalle
+discord_username: Fr3akazo1d#4082
+dribbble_username: 
+flickr_username: 
+
 
 #for comments ( we got Disqus and Hyvor Commenting, uncomment the one you want to use )
 
@@ -87,17 +105,17 @@ flickr_username: johndoe
 hyvor_talk_website_id: 476
 
 # wakatime username (coding activity)
-wakatime_username: sujaykundu777
+wakatime_username: philmalle
 
 # mailchimp embedded form url (newsletter):
-mailchimp_form_url: https://sujaykundu.us10.list-manage.com/subscribe/post?u=50bab1c85eae24ecfb0f68361&amp;id=3a2dd721d0
+# mailchimp_form_url: https://sujaykundu.us10.list-manage.com/subscribe/post?u=50bab1c85eae24ecfb0f68361&amp;id=3a2dd721d0
 
 # contact form - (choose formspress or getform)
-getform_endpoint: 83b703c3-9e47-4df4-ac55-e24d7eb02abc
-formspree_email: johndoe@gmail.com
+#getform_endpoint: 83b703c3-9e47-4df4-ac55-e24d7eb02abc
+#formspree_email: johndoe@gmail.com
 
 # releases - widget can be (sidebar, modal or embed)
-olvy_organization: devlopr
+#olvy_organization: devlopr
 olvy_widget_type: sidebar
 
 # syntax highlighter
