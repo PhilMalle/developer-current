@@ -1,10 +1,16 @@
 ---
-layout: post
 title: Writeup - THM - Easy-Peasy
-description: "Walkthrough of Easy-Peasy of TryHackme"
-tags: [TryHackeMe, EasyPeasy, Hacking, pwned, nmap, gobuster, steganography, cronjob]
-author: Fr3akazo1d!
+layout: post
+summary: Walkthrough of Easy-Peasy of TryHackme.
+author: fr3akazo1d
+keywords: TryHackeMe, EasyPeasy, Hacking, pwned, nmap, gobuster, steganography, cronjob
+category: walkthroughs
+permalink: "/blog/easypeasy/"
+usemathjax: true
+published: true
 ---
+
+
 # Walkthrough
 
 Used gobuster 
