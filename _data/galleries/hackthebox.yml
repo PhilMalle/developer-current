@@ -1,0 +1,33 @@
+picture_path: hackthebox
+preview:
+  filename: 1
+  original: 1.jpg
+  sizes:
+  - 1.jpg
+  thumbnail: 1-thumbnail.jpg
+pictures:
+- filename: 1
+  original: 2.jpg
+  sizes:
+  - 2.jpg
+  thumbnail: 2-thumbnail.jpg
+- filename: 2
+  original: 3.jpg
+  sizes:
+  - 3.jpg
+  thumbnail: 3-thumbnail.jpg
+- filename: 3
+  original: 4.jpg
+  sizes:
+  - 4.jpg
+  thumbnail: 4-thumbnail.jpg
+- filename: 4
+  original: 5.jpg
+  sizes:
+  - 5.jpg
+  thumbnail: 5-thumbnail.jpg
+- filename: 5
+  original: 6.jpg
+  sizes:
+  - 6.jpg
+  thumbnail: 6-thumbnail.jpg
