@@ -21,7 +21,7 @@ html[data-theme="dark"] {
     --social-link-color: #ffffff;
     --card-background-color: rgb(59,66,82);
     --newsletter-background-color: #3b4252;
-    --button-background-color: #111;
+    --button-background-color: #3b4252;
 }
 
 html,
@@ -41,7 +41,7 @@ html[data-theme="light"] {
     --social-link-color: #262222;
     --card-background-color: rgb(229,233,240);
     --newsletter-background-color: #00000008;
-    --button-background-color: #fff;
+    --button-background-color: #e5e9f0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,7 +65,7 @@ html[data-theme="light"] {
         --social-link-color: #ffffff;
         --card-background-color: rgb(59,66,82);
         --newsletter-background-color: #3b4252;
-        --button-background-color: #111;
+        --button-background-color: #3b4252;
     }
 
     /* Light Mode */
@@ -87,7 +87,7 @@ html[data-theme="light"] {
         --underline-color: hsl(0, 0%, 60%);
         --social-link-color: #262222;
         --card-background-color: rgb(229,233,240);
-        --button-background-color: #fff;
+        --button-background-color:#e5e9f0;
     }
 }
 
