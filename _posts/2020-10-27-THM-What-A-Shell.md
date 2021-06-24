@@ -1,11 +1,16 @@
 ---
-layout: post
 title: Writeup - THM - What the Shell
-description: "An introduction to sending and receiving (reverse/bind) shells when exploiting target machines."
-tags: Shell, netcat, socat, metasploit
-author: Fr3akazo1d!
-image: /assets/img/thm-images/whatashell-thm.png
+layout: post
+summary: An introduction to sending and receiving (reverse/bind) shells when exploiting target machines.
+author: fr3akazo1d
+keywords: Shell, netcat, socat, metasploit
+category: walkthroughs
+thumbnail: "/assets/img/thm-images/whatashell-thm.png"
+permalink: "/blog/bountyhacker/"
+usemathjax: true
+published: true
 ---
+
 
 # General Information
 
