@@ -1,9 +1,13 @@
 ---
-layout: post
 title: Writeup - THM - Anthem
-description: "Walkthrough of Anthem of TryHackme"
-tags: [TryHackeMe, Anthem, Hacking, pwned]
-author: Fr3akazo1d!
+layout: post
+summary: Walkthrough of Anthem of TryHackme.
+author: fr3akazo1d
+keywords: TryHackeMe, Anthem, Hacking, pwned
+category: walkthroughs
+permalink: "/blog/anthem/"
+usemathjax: true
+published: true
 ---
 
 # General Information
