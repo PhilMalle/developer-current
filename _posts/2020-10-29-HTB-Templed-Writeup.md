@@ -1,11 +1,18 @@
 ---
 title: Writeup - HTB - Templed
-author: Fr3akazo1d!
-date: 2020-10-29 23:14:00 +0100
-categories: [Hacking, CTF]
-tags: [Security, Templed, Cypher, Crypto, Challenge, HackTheBox, HTB]
-image: /assets/img/htb-images/templed-htb.png
+layout: post
+summary: Walkthrough of Templed from HackTheBox.
+author: fr3akazo1d
+date: '2020-10-29 23:14:00'
+keywords: Security, Templed, Cypher, Crypto, Challenge, HackTheBox, HTB
+category: walkthroughs
+thumbnail: "/assets/img/htb-images/templed-htb.png"
+permalink: "/blog/templed/"
+usemathjax: true
+published: true
 ---
+
+
 # General Information
 
 | Platform | Room        | Date        | Difficulty | Tags                               | Time |
