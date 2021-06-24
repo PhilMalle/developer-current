@@ -1,49 +1,29 @@
 # Add Authors here
-johndoe:
-   name: John Doe
-   username: johndoe
-   site: http://johndoe.com
-   avatar: johndoe.png
-   bio: "Hi I a John, a Web Developer and Designer."
-   email: mail@johndoe.com
+philmalle:
+   name: Phil Malle
+   username: philmalle
+   site: https://philmalle.github.io
+   avatar: Phil.png
+   bio: "Cyber-Security Entusiast, CTF-Player"
+   email: philipp.malle@pm.com
    social:
       - title: "github"
-        url: "https://github.com/johndoe"
+        url: "https://github.com/philmalle"
       - title: "linkedin"
-        url: "https://www.linkedin.com/in/johndoe"
+        url: "https://www.linkedin.com/in/phil-malle"
       - title: "youtube"
-        url: "https://www.youtube.com/channel/UCSfLBFFfNU9r6ihfei6VeJw"
+        url: "https://www.youtube.com"
       - title: "facebook"
-        url: "https://www.facebook.com/johndoe"
-      - title: "twitter"
-        url: "https://www.twitter.com/johndoe"
-      - title: "behance"
-        url: "https://behance.com/johndoe"
-      - title: "instagram"
-        url: "https://instagram.com/johndoe"
-      - title: "medium"
-        url: "https://medium.com/johndoe"
-      - title: "telegram"
-        url: "https://telegram.com/johndoe"
-      - title: "dribbble"
-        url: "https://dribbble.com/johndoe"
-      - title: "flickr"
-        url: "https://flickr.com/johndoe"
+        url: "https://www.facebook.com/malle.phil"
 
-xplor4r:
-   name: Sujay kundu
-   username: xplor4r
-   site: https://sujaykundu.com
-   avatar: xplor4r.png
-   bio: "Full Stack Web Developer, based in Bangalore, India"
-   email: mail@sujaykundu.com
+fr3akazo1d:
+   name: Fr3akazo1d!
+   username: fr3akazo1d
+   site: https://fr3akazo1d.github.io
+   avatar: freakazoid.png
+   bio: "Cyber-Security Entusiast, CTF-Player"
+   email: fr3akazo1d@protonmail.com
    social:
       - title: "github"
-        url: "https://github.com/sujaykundu777"
-      - title: "linkedin"
-        url: "https://www.linkedin.com/in/sujaykundu"
-      - title: "youtube"
-        url: "https://www.youtube.com/channel/UCSfLBFFfNU9r6ihfei6VeJw"
-      - title: "facebook"
-        url: "https://www.facebook.com/sujay.kundu2"
+        url: "https://github.com/fr3akazo1d"
 
