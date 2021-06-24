@@ -1,11 +1,16 @@
 ---
 title: Writeup - THM - Tartarus
-author: Fr3akazo1d!
-date: 2020-10-27 23:14:00 +0100
-categories: [Hacking, CTF]
-tags: [tryhackeme, tartarus, hacking, pwned, nmap, gobuster, cronjob]
-image: /assets/img/thm-images/tartarus-thm.png
+layout: post
+date: '2020-10-27 23:14:00'
+summary: Walkthrough of Tartarus of TryHackme.
+author: fr3akazo1d
+keywords: tryhackeme, tartarus, hacking, pwned, nmap, gobuster, cronjob
+category: walkthroughs
+permalink: "/blog/tartarus/"
+usemathjax: true
+published: true
 ---
+
 # General Information
 
 | Room        | Date        | Difficulty | Tags                               | Time |
