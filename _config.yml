@@ -18,7 +18,7 @@ urls:
       url : /contact
     - text: Links
       url: /links
-    - text: PGP-Public-Key
+    - text: GNUPG-Public Key
       url: /pgp
 
 
