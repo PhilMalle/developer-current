@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 menus: header
 title: Links
 permalink: /pgp/
