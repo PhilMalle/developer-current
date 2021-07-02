@@ -1,5 +1,5 @@
 ---
-layout: compress
+layout: full-width
 menus: header
 title: GNUPG Public Key
 summary: Public key for secure communication. 
