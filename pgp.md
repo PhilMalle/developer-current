@@ -7,6 +7,9 @@ author: philmalle
 permalink: /pgp/
 ---
 
+# OPENPGP Public Key
+
+---
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
