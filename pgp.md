@@ -3,6 +3,7 @@ layout: post
 menus: header
 title: GNUPG Public Key
 summary: Public key for secure communication. 
+date: '2021-07-02 20:00:00'
 author: philmalle
 keywords: gpg, secure, encryption, mail, communication
 category: secure
