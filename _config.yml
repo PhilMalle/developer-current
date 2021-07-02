@@ -18,6 +18,8 @@ urls:
       url : /contact
     - text: Links
       url: /links
+    - text: PGP-Public-Key
+      url: /pgp
 
 
 # Edit Author details (For multi authors check _data/authors.yml)
