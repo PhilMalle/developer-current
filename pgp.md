@@ -10,9 +10,6 @@ permalink: /pgp/
 usemathjax: true
 ---
 
-# GNUPG Public Key
-
----
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
