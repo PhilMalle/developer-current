@@ -1,5 +1,5 @@
 ---
-layout: blog
+layout: default
 menus: header
 title: GNUPG Public Key
 summary: Public key for secure communication. 
