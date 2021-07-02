@@ -1,8 +1,13 @@
 ---
 layout: post
 menus: header
-title: Links
+title: GNUPG Public Key
+summary: Public key for secure communication. 
+author: philmalle
+keywords: gpg, secure, encryption, mail, communication
+category: secure
 permalink: /pgp/
+usemathjax: true
 ---
 
 # GNUPG Public Key
