@@ -7,6 +7,7 @@ permalink: /pgp/
 
 # GNUPG Public Key
 
+---
 
 ```pgp
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -67,3 +68,5 @@ tPkcab3lLuh5sQ==
 =JT86
 -----END PGP PUBLIC KEY BLOCK-----
 ```
+
+---
