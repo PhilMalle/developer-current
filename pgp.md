@@ -9,7 +9,7 @@ permalink: /pgp/
 
 ---
 
-```pgp
+```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: OpenPGP.js v4.10.10
 Comment: https://openpgpjs.org
