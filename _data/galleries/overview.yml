@@ -28,6 +28,7 @@
 -
   title: TCM-Security
   directory: TCM-Security
+  preview:
     filename: 1.jpg
     original: 1-thumbnail.jpg
     sizes:
