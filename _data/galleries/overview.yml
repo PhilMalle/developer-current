@@ -17,6 +17,23 @@
     - 1-thumbnail.jpg
     thumbnail: 1-thumbnail.jpg
 -
+  title: PentesterLab
+  directory: pentesterlab
+  preview:
+    filename: 1.jpg
+    original: 1-thumbnail.jpg
+    sizes:
+    - 1-thumbnail.jpg
+    thumbnail: 1-thumbnail.jpg
+-
+  title: TCM-Security
+  directory: TCM-Security
+    filename: 1.jpg
+    original: 1-thumbnail.jpg
+    sizes:
+    - 1-thumbnail.jpg
+    thumbnail: 1-thumbnail.jpg
+-
   title: Try Hack Me
   directory: tryhackme
   preview:
