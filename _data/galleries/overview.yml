@@ -27,7 +27,7 @@
     thumbnail: 1-thumbnail.jpg
 -
   title: TCM-Security
-  directory: TCM-Security
+  directory: tcmsecurity
   preview:
     filename: 1.jpg
     original: 1-thumbnail.jpg
