@@ -74,17 +74,17 @@ author_project_details:
               - project_thumbnail: BlueteamlabsOnline.png
                 project_title: BlueTeamLabs
                 project_description: A Platform for Cyber Defense
-                project_url: https://blueteamlabs.online
+                project_url: https://blueteamlabs.online/public/user/b97bc149cd0050663fa4a4
                 visibility: true
               - project_thumbnail: HackTheBox.jpg
                 project_title: HackTheBox
                 project_description: A Platform for Hacking
-                project_url: https://hackthebox.eu
+                project_url: https://app.hackthebox.eu/profile/307465
                 visibility: true
               - project_thumbnail: THMlogo.jpg
                 project_title: TryHackMe
                 project_description: A Platform for Hacking
-                project_url: https://tryhackme.com
+                project_url: https://tryhackme.com/p/Fr3akazo1d
                 visibility: true
 
 # social links
